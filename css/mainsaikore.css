@@ -1,0 +1,44 @@
+body {
+    color: white;
+    background-image: url("img/universo.gif");
+    margin: 25px 0px 0px 0px;
+    padding: 0px;
+    font-family: "Comic Sans MS";
+}
+
+a:link {
+    color: #CF9FFF;
+}
+
+a:visited {
+    color: #CF9FFF;
+}
+
+a:hover {
+    color: #CF9FFF;
+}
+
+a:active {
+    color: #CF9FFF;
+}
+
+mark {
+    background-color: black;
+}
+
+table {
+    background: black;
+    background-image: url("img/space.png");
+    text-align: center;
+}
+
+td {
+    width: 150px;
+    font-size: 20px;
+}
+
+div.middle {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+}
