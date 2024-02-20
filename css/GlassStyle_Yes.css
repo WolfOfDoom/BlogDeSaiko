@@ -1,4 +1,4 @@
-.glass {
+.glassy {
     /* background styles */
     position: relative;
     display: inline-block;
@@ -18,7 +18,7 @@
     text-shadow: 0px -1px #252525;
 }
 
-.glass:after {
+.glassy:after {
     content: '';
     position: absolute;
     top: 2px;
@@ -28,6 +28,6 @@
     background: linear-gradient(rgba(255, 255, 255, 0.616), rgba(255, 255, 255, 0.2));
 }
 
-.glass:hover {
-    background: linear-gradient(rgb(71, 120, 255), rgb(129, 191, 241));
+.glassy:hover {
+    background: linear-gradient(rgb(71, 255, 71), rgb(142, 241, 129));
 }
