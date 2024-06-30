@@ -14,6 +14,8 @@ let audioIndex = 0;
 
 loadAudio(songs[audioIndex])
 
+audio.autoplay = true;
+
 function loadAudio(song) {
   title.textContent = song;
   audio.src = `audioplayer-main/audio/${song}.mp3`;
