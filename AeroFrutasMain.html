@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="css/GlassStyle.css">
     <link rel="stylesheet" href="css/GlassyStyle_Contenedor.css">
     <link rel="stylesheet" href="css/cursor2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/reproductor1.css">
     <style>
         body {
             background: url(img/frutiger.webp);
@@ -82,7 +84,37 @@
                 </tbody>
             </table>
         </div>
-        <a href="MainSaikore.html" class="glass"> Downgrade </a>
+        <a href="MainSaikore.html" class="glass"> Downgrade </a><br><br>
+
+        <div class="container">
+            <audio></audio>
+
+            <h1>Song</h1>
+
+            <div id="current_time">0:00</div>
+
+            <div class="buttons">
+                <button id="prev">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button id="play">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="next">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+
+            <div id="current_audio"></div>
+
+            <div class="progress_container">
+                <div id="progress"></div>
+            </div>
+
+        </div>
+
+
+        <script src="Scripts/reproafm.js"></script>
     </center>
 </body>
 

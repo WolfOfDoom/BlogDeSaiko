@@ -19,9 +19,11 @@
     <link rel="stylesheet" href="css/GlassStyle.css">
     <link rel="stylesheet" href="css/GlassyStyle_Contenedor.css">
     <link rel="stylesheet" href="css/cursor2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/reproductor1.css">
     <style>
         body {
-            background: url(img/frutiger.webp);
+            background: url(img/frutigeraero3.png);
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0;
@@ -39,7 +41,7 @@
                             <h2 style="margin: 0px">Sobre mi</h2>
                         </td>
                     </tr>
-                    <tr height="50px">
+                    <tr height="20px">
                         <td class="tdsb" colspan="4">
                             <img src="img/cooldoldweb.webp" height="100px" width="200px" alt
                                 title="EverClean by ROHA Tecnologies"><br>
@@ -56,7 +58,38 @@
                 </tbody>
             </table>
         </div>
-        <a href="AeroFrutasMain.html" class="glass"> Regresar </a>
+        <a href="AeroFrutasMain.html" class="glass"> Regresar </a> <br><br>
+
+        <div class="container">
+            <audio></audio>
+
+            <h1>Song</h1>
+
+            <div id="current_time">0:00</div>
+
+            <div class="buttons">
+                <button id="prev">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button id="play">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="next">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+
+            <div id="current_audio"></div>
+
+            <div class="progress_container">
+                <div id="progress"></div>
+            </div>
+
+        </div>
+
+
+        <script src="audioplayer-main/app.js"></script>
+
     </center>
 </body>
 
