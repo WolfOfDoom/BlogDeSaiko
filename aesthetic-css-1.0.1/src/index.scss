@@ -1,0 +1,32 @@
+// Imports
+@import "variables";
+@import "mixins";
+@import "gradients";
+@import "colors";
+@import "font-modifiers";
+@import "effects/effects";
+@import "containers";
+@import "loading";
+@import "buttons";
+@import "dropdowns";
+@import "input";
+@import "select";
+@import "taskbar";
+@import "tabs";
+@import "modal";
+@import "notification";
+
+// Default font
+@mixin aesthetic-font {
+  font-family: $aesthetic-font-stack;
+  font-weight: lighter;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+  }
+}
+
+
+.aesthetic-font {
+  @include aesthetic-font
+}

@@ -1,0 +1,79 @@
+// Modifiers to make fonts look crazier
+
+// Font Outlines
+
+@mixin aesthetic-font-modifier-outline {
+  font-weight: bold;
+  color: $aesthetic-white;
+
+  // How to do the outline:
+  // https://stackoverflow.com/questions/4919076/outline-effect-to-text
+}
+
+.aesthetic-font-modifier-outline-black {
+  @include aesthetic-font-modifier-outline;
+
+  text-shadow:
+    -1px -1px 1px $aesthetic-black,
+    1px -1px 1px $aesthetic-black,
+    -1px 1px 1px $aesthetic-black,
+    1px 1px 1px $aesthetic-black;
+}
+
+.aesthetic-font-modifier-outline-pink {
+  @include aesthetic-font-modifier-outline;
+
+  text-shadow:
+    -1px -1px 1px $aesthetic-pink,
+    1px -1px 1px $aesthetic-pink,
+    -1px 1px 1px $aesthetic-pink,
+    1px 1px 1px $aesthetic-pink;
+}
+
+.aesthetic-font-modifier-outline-purple {
+  @include aesthetic-font-modifier-outline;
+
+  text-shadow:
+    -1px -1px 1px $aesthetic-purple,
+    1px -1px 1px $aesthetic-purple,
+    -1px 1px 1px $aesthetic-purple,
+    1px 1px 1px $aesthetic-purple;
+}
+
+// Font Gradients
+@mixin aesthetic-font-modifier-gradient {
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline;
+}
+
+.aesthetic-font-modifier-gradient-arizona {
+  @include aesthetic-font-modifier-gradient;
+
+  background-image: linear-gradient(to left, $aesthetic-arizona-pink, $aesthetic-arizona-lime, $aesthetic-arizona-green, $aesthetic-arizona-blue);
+}
+
+.aesthetic-font-modifier-gradient-pink-blue {
+  @include aesthetic-font-modifier-gradient;
+
+  background-image: linear-gradient(to right, $aesthetic-pink, $aesthetic-blue);
+}
+
+.aesthetic-font-modifier-gradient-pink-green {
+  @include aesthetic-font-modifier-gradient;
+
+  background-image: linear-gradient(to right, $aesthetic-pink, $aesthetic-green);
+}
+
+.aesthetic-font-modifier-gradient-green-pink {
+  @include aesthetic-font-modifier-gradient;
+
+  background-image: linear-gradient(to right, $aesthetic-green, $aesthetic-pink);
+}
+
+.aesthetic-font-modifier-gradient-purple-blue {
+  @include aesthetic-font-modifier-gradient;
+
+  background-image: linear-gradient(to right, $aesthetic-purple, $aesthetic-blue);
+}

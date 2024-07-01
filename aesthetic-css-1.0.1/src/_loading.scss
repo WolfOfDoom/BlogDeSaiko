@@ -1,0 +1,83 @@
+@keyframes aesthetic-windows-95-boot-infinite-loader {
+  0% {
+    transform: translate(-220%);
+  }
+  100% {
+    transform: translate(160%);
+  }
+}
+
+.aesthetic-windows-95-boot-loader {
+  width: 100%;
+  height: 20px;
+  background-color: $aesthetic-windows-95-gray;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.aesthetic-windows-95-boot-loader > * {
+  width: 75%;
+  height: 100%;
+  opacity: 0.5;
+  background: linear-gradient(to right, $aesthetic-windows-95-grey 0%, $aesthetic-windows-95-blue 15%, $aesthetic-windows-95-blue 85%, $aesthetic-windows-95-gray 100%);
+  display: inline-block;
+  margin-right: 1px;
+  animation: aesthetic-windows-95-boot-infinite-loader 4.5s infinite;
+  animation-timing-function: linear;
+}
+
+// Windows XP loading bar
+// https://codepen.io/duptitung/pen/XMVNyZ
+@keyframes aesthetic-windows-xp-infinite-loader {
+  0% {
+    transform: translate(-50px);
+  }
+  100% {
+    transform: translate(160px);
+  }
+}
+
+.aesthetic-windows-xp-loader {
+  width: 150px;
+  height: 10px;
+  border: 2px solid #b2b2b2;
+  border-radius: 7px;
+  padding: 2px 1px;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.aesthetic-windows-xp-loader > * {
+  width: 9px;
+  height: 100%;
+  background: linear-gradient(to bottom, #2838c7 0%,#5979ef 17%,#869ef3 32%,#869ef3 45%,#5979ef 59%,#2838c7 100%);
+  display: inline-block;
+  margin-right: 2px;
+  animation: aesthetic-windows-xp-infinite-loader 3.5s infinite;
+  animation-timing-function: linear;
+}
+
+.aesthetic-windows-95-loader {
+  width: 150px;
+  height: 20px;
+  border-top: 1px solid $aesthetic-windows-95-black;
+  border-left: 1px solid $aesthetic-windows-95-black;
+  border-right: 1px solid $aesthetic-windows-95-grey-border;
+  border-bottom: 1px solid $aesthetic-windows-95-grey-border;
+  border-radius: 0px;
+  padding: 1px 1px;
+  background-color: $aesthetic-windows-95-gray;
+
+  overflow: hidden;
+  font-size: 0;
+}
+
+.aesthetic-windows-95-loader > * {
+  width: 12px;
+  height: 100%;
+  background: $aesthetic-windows-95-blue;
+  display: inline-block;
+  margin-right: 1px;
+  animation: aesthetic-windows-xp-infinite-loader 3.5s infinite;
+  animation-timing-function: linear;
+}

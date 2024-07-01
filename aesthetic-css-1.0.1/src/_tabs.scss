@@ -1,0 +1,111 @@
+.aesthetic-windows-95-tabbed-container {
+
+  .aesthetic-windows-95-tabbed-container-tabs {
+
+    display: flex;
+    height: 28px;
+    width: 100%;
+
+    .aesthetic-windows-95-tabbed-container-tabs-button {
+
+      @include windows-95-pop-out;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-color: transparent;
+      box-shadow: 1px 0 0 0 $aesthetic-windows-95-black;
+
+      background-color: $aesthetic-windows-95-grey;
+      color: $aesthetic-windows-95-black;
+
+      height: 26px;
+      text-align: center;
+      z-index: 0;
+
+      margin-left: 1px;
+      padding-left: 4px;
+      padding-right: 4px;
+
+      &:first-child {
+        margin-left: 2px;
+      }
+
+      &.is-active {
+        position: relative;
+        left: 0;
+        bottom: 1px;
+
+        height: 29px;
+        margin-left: -2px;
+
+        z-index: 1;
+
+        &:first-child {
+          margin-left: 0px;
+        }
+      }
+
+      button {
+        @include no-button-styles;
+        padding: 2px;
+        width: 100%;
+
+        &:focus {
+          @include windows-95-focus-outline;
+        }
+      }
+
+    }
+  }
+}
+
+.aesthetic-windows-xp-tabbed-container {
+
+  .aesthetic-windows-xp-tabbed-container-tabs {
+
+    display: flex;
+    height: 28px;
+    width: 100%;
+
+    .aesthetic-windows-xp-tabbed-container-tabs-button {
+
+      background-color: $aesthetic-windows-xp-white;
+
+      border: 1px solid;
+      border-color: $aesthetic-windows-xp-border-light;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-color: transparent;
+
+      padding-left: 10px;
+      padding-right: 10px;
+
+      text-align: center;
+      outline: 0;
+
+      &.is-active {
+
+        position: relative;
+        height: 30px;
+        bottom: 3px;
+
+        border-top: 2px solid;
+        border-top-color: $aesthetic-windows-xp-light-orange;
+
+        z-index: 1;
+      }
+
+      button {
+        @include no-button-styles;
+        padding: 2px;
+        width: 100%;
+
+        &:focus {
+          @include windows-xp-focus-outline;
+        }
+      }
+
+    }
+
+  }
+
+}
