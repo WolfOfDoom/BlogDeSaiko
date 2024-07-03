@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-FWT5QJ8WJC');
+</script>
+
+<head>
+    <link rel="shortcut icon" href="img/windows7.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/cursor2.css">
+    <link rel="stylesheet" href="css/reproductor1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>No es el fin... aun</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Frutiger:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Frutiger', sans-serif;
+            background: url(img/dzcr.png);
+            color: black;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .window {
+            width: 500px;
+            background: rgba(19, 19, 19, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .title-bar {
+            background: linear-gradient(to bottom, #0c0c0c75, #0e0d0dc0);
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            border-bottom: 1px solid #2a5b91;
+        }
+
+        .title-bar .title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .title-bar .buttons {
+            display: flex;
+        }
+
+        .title-bar .buttons button {
+            width: 18px;
+            height: 18px;
+            margin-left: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .title-bar .buttons button img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            padding: 20px;
+            color: white;
+            text-align: left;
+        }
+
+        .content h1 {
+            font-size: 18px;
+        }
+
+        .content p {
+            font-size: 14px;
+        }
+
+        .button-group {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: 1px solid #b4b4b4;
+            background: rgba(72, 69, 207, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        .button-group button:hover {
+            background: rgba(49, 30, 155, 0.3);
+        }
+
+        .abstract-shape {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #1100ff, #00ffff);
+            opacity: 0.3;
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="abstract-shape"></div>
+    <div class="window">
+        <div class="title-bar">
+            <span class="title">S A I K O R E</span>
+            <div class="buttons">
+            </div>
+        </div>
+        <div class="content">
+            <h2>Welcome to the Saikore Setup Wizard</h2>
+            <p>
+                This wizard will install the update package version 24.07.02r for SAIKORE 10.11 SP1 x86-x64 / 2024 R2
+                SP1
+                x64.
+            </p>
+            <p>
+                It is recommended to close all other applications before starting Setup. The installation can be
+                canceled.
+            </p>
+            <p>
+                To get the latest news and updates, visit the project page: <br><a href="SaikoWorld7.html">
+                    <font color="white">https://███████████.███/</font>
+                </a>
+            </p>
+            <p>
+                Click "Install" to start the installation of updates, or "Cancel" to exit the program.
+            </p>
+            <div class="button-group">
+                <a href="Progreso.html">
+                    <button>
+                        <font color="white">Install</font>
+                    </button>
+                </a>
+                <a href="AeroFrutasMain.html">
+                    <button>
+                        <font color="white">Cancel</font>
+                    </button>
+                </a>
+                <p> </p>
+
+
+
+
+                <center>
+                    <div class="container">
+                        <audio></audio>
+
+                        <h1>Song</h1>
+
+                        <div id="current_time">0:00</div>
+
+                        <div class="buttons">
+                            <button id="prev">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button id="play">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button id="next">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                        </div>
+
+                        <div id="current_audio"></div>
+
+                        <div class="progress_container">
+                            <div id="progress"></div>
+                        </div>
+
+                    </div>
+
+
+                    <script src="Scripts/reprodzcr.js"></script>
+                </center>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
