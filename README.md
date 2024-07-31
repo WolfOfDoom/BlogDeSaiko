@@ -2,7 +2,7 @@
 
 MIRA ESTO EN VERSION CODIGO
 
-El Blog de Saiko es una pagina que hago en mis ratos libres, trato de englobar todo lo que pueda o se me ocurra para poder practicar mi habilidad
+El Blog de Saiko es una pagina que hago en mis ratos libres, trato de englobar todo lo que pueda o se me ocurra para poder practicar mi habilidad.
 
 
 
