@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+p {
+    color: #ff0000;
+    font-size: 1rem;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+}
+
+p.off {
+    opacity: 0.2;
+    text-shadow: 0 0 5px #ff4800, 0 0 10px #ff5100;
+}
