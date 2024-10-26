@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #80f0ff;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* Estilos para las barras laterales */
+.sidebar {
+    width: 150px;
+    background-color: #ff99f7;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 130px;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    background-color: #ffff99;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.sidebar a:hover {
+    background-color: #ff9966;
+}
+
+/* Contenedor principal donde se mostrará el iframe */
+.main-content {
+    width: 100%;
+    max-width: 880px;
+    background-color: #ffffcc;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+/* Estilos para el iframe */
+iframe {
+    width: 100%;
+    height: 880px;
+    border: none;
+}

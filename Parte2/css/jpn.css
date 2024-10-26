@@ -1,0 +1,128 @@
+/* Fondo colorido y tipografía simple */
+body {
+    background-color: #ffccff;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Contenedor de la página */
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid #333;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Títulos coloridos y resaltados */
+h1 {
+    font-size: 24px;
+    color: #ff6699;
+}
+
+h2 {
+    font-size: 18px;
+    color: #3366ff;
+}
+
+/* Enlaces de navegación */
+.navigation {
+    background-color: #ffff99;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.navigation a {
+    color: #ff0066;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* Iconos y GIFs */
+.icon {
+    width: 50px;
+    height: auto;
+}
+
+.gif {
+    width: 200px;
+    height: auto;
+}
+
+/* Galería de imágenes */
+.gallery-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.gallery-images img {
+    width: 200px;
+    height: auto;
+    border: 2px solid #333;
+}
+
+/* Estilos de formulario */
+form {
+    background-color: #ffffcc;
+    padding: 10px;
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    border-radius: 3px;
+}
+
+input[type="submit"] {
+    background-color: #ff6699;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #ff3366;
+}
+
+.sidebar {
+    width: 150px;
+    background-color: #ff99f7;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    background-color: #ffff99;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.sidebar a:hover {
+    background-color: #ff9966;
+}
