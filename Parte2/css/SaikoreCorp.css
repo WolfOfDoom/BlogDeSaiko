@@ -1,0 +1,146 @@
+/* Estilo base */
+body {
+    background-color: #121212;
+    color: #00ffcc;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Encabezado */
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Título con efecto de neón */
+.neon-title {
+    font-size: 2.5em;
+    color: #ff00ff;
+    text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #ff00ff,
+        0 0 40px #ff00ff;
+    position: relative;
+}
+
+/* Efecto glitch aplicado directamente al título */
+.neon-title::before,
+.neon-title::after {
+    content: 'SaikoreCorp Noticias';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #ff99ff;
+    opacity: 0.8;
+    clip-path: inset(0 0 50% 0);
+    animation: glitch 2s infinite ease-in-out;
+}
+
+.neon-title::after {
+    color: #00ffff;
+    clip-path: inset(50% 0 0 0);
+    animation: glitch2 2s infinite ease-in-out;
+}
+
+/* Animaciones de glitch */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, -2px);
+    }
+
+    40% {
+        transform: translate(2px, 2px);
+    }
+
+    60% {
+        transform: translate(-2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch2 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, -2px);
+    }
+
+    80% {
+        transform: translate(-2px, 2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* Noticias */
+main {
+    width: 90%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.noticia {
+    background-color: #1a1a1a;
+    border-left: 5px solid #00ffcc;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.titulo-noticia {
+    font-size: 1.5em;
+    color: #ff00ff;
+}
+
+/* Estilo para pistas ocultas */
+.pista {
+    color: #ff3333;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* Botón con efecto neón */
+.neon-button {
+    background-color: #0e0e0e;
+    color: #ff00ff;
+    border: 2px solid #ff00ff;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+
+.neon-button:hover {
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+}
