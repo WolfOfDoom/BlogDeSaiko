@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-FWT5QJ8WJC');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Un (1) frijol </title>
+</head>
+
+<body>
+    <style>
+        body {
+            transition: background-color 0.1s;
+        }
+
+        .image-container {
+            perspective: 1000px;
+            /* Añade profundidad 3D */
+            display: flex;
+            justify-content: center;
+            /* Centra horizontalmente */
+            align-items: center;
+            /* Centra verticalmente */
+            height: 100vh;
+            /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+        }
+
+        .image-container img {
+            width: 500px;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            /* Activa el efecto 3D */
+        }
+
+        /* Define la animación de giro */
+        @keyframes giroInfinito {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        /* Define la animación de luces de colores para el fondo */
+        @keyframes lucesEpilepticas {
+            0% {
+                background-color: red;
+            }
+
+            25% {
+                background-color: blue;
+            }
+
+            50% {
+                background-color: yellow;
+            }
+
+            75% {
+                background-color: green;
+            }
+
+            100% {
+                background-color: purple;
+            }
+        }
+
+        /* Activa la animación de luces en todo el fondo cuando el cursor esté sobre la imagen */
+        .imag:hover body {
+            animation: lucesEpilepticas 0.1s infinite;
+        }
+
+        /* Aplica la animación cuando el cursor está sobre la imagen */
+        img:hover {
+            animation: giroInfinito 0.3s infinite linear;
+            /* Gira indefinidamente cada 0.3 segundos */
+        }
+    </style>
+
+    <div class="image-container">
+        <a href="retropon.html"><img src="../img/frijol2.png" alt="Imagen Giratoria en 3D"></a>
+        <audio id="miAudio" src="../djmorfiusyelpelondelmaicrofonyunou/OIIAOIIA.mp3"></audio>
+        <!-- Cambia la ruta a tu archivo de audio -->
+    </div>
+
+    <script>
+        const imagen = document.getElementById('imagenGiratoria');
+        const audio = document.getElementById('miAudio');
+
+        // Reproduce la canción cuando el cursor está sobre la imagen
+        imagen.addEventListener('mouseover', () => {
+            audio.currentTime = 0; // Reinicia el audio
+            audio.play();
+        });
+
+        // Pausa la canción cuando el cursor sale de la imagen
+        imagen.addEventListener('mouseout', () => {
+            audio.pause();
+        });
+    </script>
+
+</body>
+
+</html>
