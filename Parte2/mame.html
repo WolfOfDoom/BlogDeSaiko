@@ -21,7 +21,7 @@
             /* Centra horizontalmente */
             align-items: center;
             /* Centra verticalmente */
-            height: 100vh;
+            height: 1000vh;
             /* Asegura que el contenedor ocupe toda la altura de la pantalla */
         }
 
@@ -71,12 +71,57 @@
             animation: giroInfinito 0.3s infinite linear;
             /* Gira indefinidamente cada 0.3 segundos */
         }
+
+        /* Estilos para la imagen terrorífica */
+        .scary-image {
+            position: fixed;
+            top: 50%;
+            left: -200px;
+            /* Fuera de la pantalla a la izquierda */
+            transform: translateY(-10%) rotate(45deg) scale(170%);
+            width: 150px;
+            opacity: 0;
+            /* Oculta la imagen por defecto */
+            transition: opacity 0.5s ease;
+        }
+
+        /* Animación para que aparezca y desaparezca */
+        @keyframes slideInAndOut {
+            0% {
+                left: -200px;
+                opacity: 0;
+            }
+
+            20% {
+                left: 20px;
+                opacity: 1;
+            }
+
+            80% {
+                left: 20px;
+                opacity: 1;
+            }
+
+            100% {
+                left: -200px;
+                opacity: 0;
+            }
+        }
+
+        /* Clase que activa la animación */
+        .animate-scary {
+            animation: slideInAndOut 4s ease;
+        }
     </style>
 
     <div class="image-container">
-        <a href="#"><img src="../img/frijol2.png" alt="Imagen Giratoria en 3D" id="imagenGiratoria"></a>
+        <a href="retropon.html"><img src="../img/frijol2.png" alt="Frijol Girando" id="imagenGiratoria"></a>
         <audio id="miAudio" src="../djmorfiusyelpelondelmaicrofonyunou/OIIAOIIA.mp3"></audio>
         <!-- Cambia la ruta a tu archivo de audio -->
+
+        <!-- Imagen terrorífica que aparece y desaparece -->
+        <img src="../img/omobean.png" alt="Omobean" id="scaryImage" class="scary-image">
+
     </div>
 
     <script>
@@ -105,6 +150,21 @@
             audio.pause();
             desactivarLucesEpilepticas();
         });
+
+        const scaryImage = document.getElementById('scaryImage');
+
+        // Función para activar la animación
+        function showScaryImage() {
+            scaryImage.classList.add('animate-scary');
+
+            // Quitar la clase después de la animación para poder reutilizarla
+            setTimeout(() => {
+                scaryImage.classList.remove('animate-scary');
+            }, 4000); // Tiempo total de la animación
+        }
+
+        // Mostrar la imagen terrorífica cada 10 segundos
+        setInterval(showScaryImage, 20000);
     </script>
 
 </body>
