@@ -57,7 +57,7 @@ setTimeout(() => {
         //Canciones
         cancionMostrar.play(); // Reproduce la canción cuando se muestra la pierna
         cancionOcultar.pause(); // Pausa la segunda canción
-        cancionMostrar.currentTime = 0; // Reinicia la primera canción
+        cancionMostrar.currentTime = 1; // Reinicia la primera canción
         cancionMostrar.play(); // Reproduce la primera canción
     });
 }, 7000); // Espera 20000 ms (20 segundos) para habilitar los eventos
