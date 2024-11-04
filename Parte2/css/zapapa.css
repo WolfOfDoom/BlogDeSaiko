@@ -64,7 +64,7 @@ html {
 .hidden {
     opacity: 0;
     /* Oculta la pierna */
-    transition: opacity 0s;
+    transition: opacity 0s ease;
     /* No aplica transición de opacidad */
     visibility: hidden;
     /* También oculta el elemento de la vista */
@@ -88,4 +88,60 @@ html {
         top: -5%;
         opacity: 1;
     }
+}
+
+.texto-terror {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: rgb(250, 16, 16);
+    font-family: "Rubik Broken Fax";
+    /* Usa una fuente "de terror" */
+    text-shadow: 2px 2px 4px #000;
+    opacity: 0;
+    /* Invisible por defecto */
+    transition: opacity 0.3s;
+}
+
+@keyframes temblor {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-52%, -48%) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-48%, -52%) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotate(0.5deg);
+    }
+}
+
+.texto-terror.temblor-activo {
+    animation: temblor 0.1s infinite;
+    opacity: 1;
+}
+
+.ManoI,
+.ManoD {
+    position: absolute;
+    width: 350px;
+    top: 350px;
+    transition: opacity 0.3s;
+}
+
+.ManoI {
+    left: 350px;
+}
+
+.ManoD {
+    right: 310px;
 }
