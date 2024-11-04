@@ -1,15 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-FWT5QJ8WJC');
-</script>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -76,11 +66,6 @@
             }
         }
 
-        /* Activa la animación de luces en todo el fondo cuando el cursor esté sobre la imagen */
-        .imag:hover body {
-            animation: lucesEpilepticas 0.1s infinite;
-        }
-
         /* Aplica la animación cuando el cursor está sobre la imagen */
         img:hover {
             animation: giroInfinito 0.3s infinite linear;
@@ -89,7 +74,7 @@
     </style>
 
     <div class="image-container">
-        <a href="retropon.html"><img src="../img/frijol2.png" alt="Imagen Giratoria en 3D"></a>
+        <a href="#"><img src="../img/frijol2.png" alt="Imagen Giratoria en 3D" id="imagenGiratoria"></a>
         <audio id="miAudio" src="../djmorfiusyelpelondelmaicrofonyunou/OIIAOIIA.mp3"></audio>
         <!-- Cambia la ruta a tu archivo de audio -->
     </div>
@@ -98,15 +83,27 @@
         const imagen = document.getElementById('imagenGiratoria');
         const audio = document.getElementById('miAudio');
 
-        // Reproduce la canción cuando el cursor está sobre la imagen
+        // Función para activar las luces epilépticas
+        function activarLucesEpilepticas() {
+            document.body.style.animation = "lucesEpilepticas 0.5s infinite";
+        }
+
+        // Función para desactivar las luces epilépticas
+        function desactivarLucesEpilepticas() {
+            document.body.style.animation = "";
+        }
+
+        // Reproduce la canción cuando el cursor está sobre la imagen y activa las luces
         imagen.addEventListener('mouseover', () => {
-            audio.currentTime = 0; // Reinicia el audio
+            audio.currentTime = 0;
             audio.play();
+            activarLucesEpilepticas();
         });
 
-        // Pausa la canción cuando el cursor sale de la imagen
+        // Pausa la canción y desactiva las luces cuando el cursor sale de la imagen
         imagen.addEventListener('mouseout', () => {
             audio.pause();
+            desactivarLucesEpilepticas();
         });
     </script>
 
