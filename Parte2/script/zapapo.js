@@ -8,8 +8,8 @@ const imagenOriginal = '../img/2.png';
 const imagenReemplazo = '../img/5.png';
 
 // Crea objetos de audio para las canciones
-const cancionMostrar = new Audio('../../djmorfiusyelpelondelmaicrofonyunou/Poniko.mp3'); // Ruta de la primera canción
-const cancionOcultar = new Audio('../../djmorfiusyelpelondelmaicrofonyunou/Uboa.mp3'); // Ruta de la segunda canción
+const cancionMostrar = new Audio('../djmorfiusyelpelondelmaicrofonyunou/Poniko.mp3'); // Ruta de la primera canción
+const cancionOcultar = new Audio('../djmorfiusyelpelondelmaicrofonyunou/Uboa.mp3'); // Ruta de la segunda canción
 
 // Reproduce la canción inicial al cargar la página
 cancionMostrar.play();
@@ -37,3 +37,4 @@ setTimeout(() => {
         cancionMostrar.play(); // Reproduce la primera canción
     });
 }, 20000); // Espera 20000 ms (20 segundos) para habilitar los eventos
+//Octubre 16
