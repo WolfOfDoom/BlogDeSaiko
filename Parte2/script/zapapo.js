@@ -8,9 +8,11 @@ const imagenOriginal = '../img/2.png';
 const imagenReemplazo = '../img/5.png';
 
 // Crea objetos de audio para las canciones
-const cancionMostrar = new Audio('../djmorfiusyelpelondelmaicrofonyunou/Poniko.mp3"'); // Ruta de la primera canción
-const cancionOcultar = new Audio('../djmorfiusyelpelondelmaicrofonyunou/Uboa.mp3"'); // Ruta de la segunda canción
+const cancionMostrar = new Audio('../../djmorfiusyelpelondelmaicrofonyunou/Poniko.mp3'); // Ruta de la primera canción
+const cancionOcultar = new Audio('../../djmorfiusyelpelondelmaicrofonyunou/Uboa.mp3'); // Ruta de la segunda canción
 
+// Reproduce la canción inicial al cargar la página
+cancionMostrar.play();
 
 // Habilita el evento de mouse después de que las animaciones iniciales terminen
 setTimeout(() => {
@@ -19,7 +21,9 @@ setTimeout(() => {
         cuerpoCentral.src = imagenReemplazo;
         piernaIzquierda.classList.add('hidden'); // Oculta la pierna izquierda sin animación
         cuerpoDurazno.classList.add('hidden');
-        cancionOcultar.play(); // Reproduce la canción cuando se oculta la pierna
+        cancionMostrar.pause(); // Pausa la canción actual
+        cancionOcultar.currentTime = 0; // Reinicia la segunda canción
+        cancionOcultar.play(); // Reproduce la segunda canción
     });
 
     // Restaura la imagen original y muestra la pierna izquierda cuando el cursor sale
@@ -28,5 +32,8 @@ setTimeout(() => {
         piernaIzquierda.classList.remove('hidden'); // Muestra la pierna izquierda
         cuerpoDurazno.classList.remove('hidden');
         cancionMostrar.play(); // Reproduce la canción cuando se muestra la pierna
+        cancionOcultar.pause(); // Pausa la segunda canción
+        cancionMostrar.currentTime = 0; // Reinicia la primera canción
+        cancionMostrar.play(); // Reproduce la primera canción
     });
 }, 20000); // Espera 20000 ms (20 segundos) para habilitar los eventos
