@@ -1,0 +1,184 @@
+.aesthetic-windows-xp-button,
+.aesthetic-windows-xp-button-title-bar,
+.aesthetic-windows-xp-button-title-bar-close {
+    width: 75px;
+    height: 20px;
+    text-align: center;
+    color: #070707;
+    background: #f8f4f1;
+    border: 2px solid;
+    border-radius: 4px;
+    border-color: #8aa2cb;
+}
+
+.aesthetic-windows-xp-button:hover,
+.aesthetic-windows-xp-button-title-bar:hover,
+.aesthetic-windows-xp-button-title-bar-close:hover {
+    border-bottom-color: #efc47b;
+}
+
+.aesthetic-windows-xp-button:focus,
+.aesthetic-windows-xp-button-title-bar:focus,
+.aesthetic-windows-xp-button-title-bar-close:focus,
+.aesthetic-windows-xp-button:focus-within,
+.aesthetic-windows-xp-button-title-bar:focus-within,
+.aesthetic-windows-xp-button-title-bar-close:focus-within {
+    border-bottom-color: #8aa2cb;
+}
+
+.aesthetic-windows-xp-button button,
+.aesthetic-windows-xp-button-title-bar button,
+.aesthetic-windows-xp-button-title-bar-close button {
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+
+.aesthetic-windows-xp-button button:focus,
+.aesthetic-windows-xp-button-title-bar button:focus,
+.aesthetic-windows-xp-button-title-bar-close button:focus {
+    outline: 1px dashed #000;
+}
+
+.aesthetic-windows-xp-button button:active,
+.aesthetic-windows-xp-button-title-bar button:active,
+.aesthetic-windows-xp-button-title-bar-close button:active {
+    background: #e3e0db;
+}
+
+.aesthetic-windows-xp-button-title-bar,
+.aesthetic-windows-xp-button-title-bar-close {
+    width: 20px;
+    color: #f8f4f1;
+    padding: 1px;
+    font-family: sans-serif;
+    border-color: #f8f4f1;
+    background: linear-gradient(to bottom, #5d5d5e 0%, #323335 10%, #08112425 60%, #20262e36 80%, #313338 100%);
+}
+
+.aesthetic-windows-xp-button-title-bar:hover,
+.aesthetic-windows-xp-button-title-bar-close:hover {
+    border-color: #f8f4f1;
+}
+
+.aesthetic-windows-xp-button-title-bar:focus,
+.aesthetic-windows-xp-button-title-bar-close:focus,
+.aesthetic-windows-xp-button-title-bar:focus-within,
+.aesthetic-windows-xp-button-title-bar-close:focus-within {
+    border-bottom-color: #f8f4f1;
+}
+
+.aesthetic-windows-xp-button-title-bar button,
+.aesthetic-windows-xp-button-title-bar-close button {
+    padding: 1px;
+}
+
+.aesthetic-windows-xp-button-title-bar button:active,
+.aesthetic-windows-xp-button-title-bar-close button:active {
+    color: #c9cac4;
+    background: linear-gradient(to bottom, #5d5d5e 0%, #323335 10%, #081124 60%, #20262e 80%, #313338 100%);
+}
+
+.aesthetic-windows-xp-button-title-bar-close {
+    background: linear-gradient(to bottom right, #efc47b 0%, #e26725 40%, #e26725 75%, #b7371a 100%);
+}
+
+.aesthetic-windows-xp-button-title-bar-close button:active {
+    background: linear-gradient(to bottom right, #070707 0%, #b7371a 5%, #b7371a 50%, #e26725 100%);
+}
+
+.aesthetic-windows-xp-tabbed-container .aesthetic-windows-xp-tabbed-container-tabs {
+    display: flex;
+    height: 28px;
+    width: 100%;
+}
+
+.aesthetic-windows-xp-tabbed-container .aesthetic-windows-xp-tabbed-container-tabs .aesthetic-windows-xp-tabbed-container-tabs-button {
+    background-color: #f8f4f100;
+    border: 1px solid;
+    border-color: #c9cac4;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    outline: 0;
+}
+
+.aesthetic-windows-xp-tabbed-container .aesthetic-windows-xp-tabbed-container-tabs .aesthetic-windows-xp-tabbed-container-tabs-button.is-active {
+    position: relative;
+    height: 30px;
+    bottom: 3px;
+    border-top: 2px solid;
+    border-top-color: #efc47b;
+    z-index: 1;
+}
+
+.aesthetic-windows-xp-tabbed-container .aesthetic-windows-xp-tabbed-container-tabs .aesthetic-windows-xp-tabbed-container-tabs-button button {
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    padding: 2px;
+    width: 100%;
+}
+
+.aesthetic-windows-xp-tabbed-container .aesthetic-windows-xp-tabbed-container-tabs .aesthetic-windows-xp-tabbed-container-tabs-button button:focus {
+    outline: 1px dashed #070707;
+}
+
+.aesthetic-windows-xp-modal {
+    background: #ece9d600;
+    border: 3px solid;
+    border-color: #2a2a2b;
+    border-top-color: #2d3c4d;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    outline: 0;
+}
+
+.aesthetic-windows-xp-modal .aesthetic-windows-xp-modal-title-bar {
+    text-align: left;
+    color: #ffffff;
+    background: linear-gradient(to bottom, #5d5d5e 0%, #010b1f 10%, #081124 60%, #20262e 80%, #313338 100%);
+    outline: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.aesthetic-windows-xp-modal .aesthetic-windows-xp-modal-title-bar .aesthetic-windows-xp-modal-title-bar-text {
+    font-size: 0.85rem;
+    text-shadow: 1px 1px #070707;
+    margin-left: 6px;
+}
+
+.aesthetic-windows-xp-modal .aesthetic-windows-xp-modal-title-bar .aesthetic-windows-xp-modal-title-bar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.aesthetic-windows-xp-modal .aesthetic-windows-xp-modal-title-bar .aesthetic-windows-xp-modal-title-bar-controls>* {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.aesthetic-windows-xp-modal .aesthetic-windows-xp-modal-content {
+    background: #85050569;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
