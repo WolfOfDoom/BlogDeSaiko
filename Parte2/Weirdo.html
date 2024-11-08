@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-FWT5QJ8WJC');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/eyei.png" type="image/x-icon">
+    <title>¿?</title>
+    <link rel="stylesheet" href="css/estetica.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-image: url(../img/windowsweird.png);
+        }
+
+        .eye {
+            position: absolute;
+            width: 110px;
+            /* Tamaño de los ojos, ajustar según prefieras */
+            height: 55px;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            /* Centra el `div` horizontalmente */
+            align-items: center;
+            /* Centra el `div` verticalmente */
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Configuración del número de ojos y ubicación aleatoria
+        const numberOfEyes = 10; // Número de imágenes de ojos que deseas
+        const images = [];
+
+        // Crea imágenes de ojos y las posiciona aleatoriamente
+        for (let i = 0; i < numberOfEyes; i++) {
+            const img = document.createElement('img');
+            img.src = '../img/eye.png'; // Ruta de tu imagen PNG de ojo
+            img.classList.add('eye');
+
+            // Posición inicial aleatoria
+            img.style.left = Math.random() * window.innerWidth + 'px';
+            img.style.top = Math.random() * 200 + 'px'; // Limita la altura a la parte superior
+
+            document.body.appendChild(img);
+            images.push(img);
+        }
+
+        // Función para reposicionar los ojos aleatoriamente
+        function repositionEyes() {
+            images.forEach(img => {
+                img.style.left = Math.random() * window.innerWidth + 'px';
+                img.style.top = Math.random() * 200 + 'px';
+            });
+        }
+
+        // Cambia la posición de los ojos cada 5 segundos (5000 ms)
+        setInterval(repositionEyes, 5000);
+    </script>
+
+    <div class="contenedor">
+        <div class="centrado">
+            <div class="aesthetic-windows-xp-modal">
+
+                <!-- Title Bar -->
+                <div class="aesthetic-windows-xp-modal-title-bar">
+
+                    <div class="aesthetic-windows-xp-modal-title-bar-text">
+                        Casper Mental
+                    </div>
+
+                    <div class="aesthetic-windows-xp-modal-title-bar-controls">
+                        <div class="aesthetic-windows-xp-button-title-bar">
+                            <a href="#">
+                                <button>
+                                    <font color="white">
+                                        _
+                                    </font>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="aesthetic-windows-xp-button-title-bar-close">
+                            <a href="#">
+                                <button>
+                                    <font color="white">
+                                        X
+                                    </font>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Content -->
+                <!-- Could be a tabbed container, or a set of dropdowns, etc... -->
+                <div class="aesthetic-windows-xp-modal-content">
+
+                    <div>
+                        <font color="white">
+                            Inmensamente crece,<br>
+                            todo llanto en mi mente,<br>
+                            triunfa y se retuerce,<br>
+                            pensamientos malos emergen,<br>
+                            cadáveres, muerte,<br>
+                            imaginación, perenne,<br>
+                            alguna vez cambiará la forma de verte?<br>
+                            cuando llegue ese día será fiesta solemne,<br>
+                            dolor, heridas,<br>
+                            amistades, huidas,<br>
+                            mi boca desprende frases homicidas,<br>
+                            mi cabeza duele, corazón infanticida,<br>
+                            espacio, vacío,<br>
+                            tropiezos, bajío,<br>
+                            duermo todo el día,<br>
+                            me distraigo todo el día,<br>
+                            intento no pensar,<br>
+                            intento no llorar,<br>
+                            intento no sufrir,<br>
+                            intento no vivir. <br><br><br>
+
+                            <i>-Saiko</i><br><br>
+                        </font>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Mano Go Back -->
+    <div style="max-height: 300px; position: fixed; left: 20px; bottom: 25px; z-index: 99;">
+        <a href="retropon.html"><img src="../img/manogoback.png" height="200" /></a>
+    </div>
+
+    <!-- Smiley Face -->
+    <div style="max-height: 300px; position: fixed; right: 20px; bottom: 300px; z-index: 99;">
+        <a href="#"><img src="../img/smileyface.webp" height="300" /></a>
+    </div>
+
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/I6pg-uQa0_k//?&;amp;;autoplay=1&;loop=1&;controls=1"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen="" loading="lazy">
+    </iframe>
+
+</body>
+
+</html>
