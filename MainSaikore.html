@@ -18,18 +18,91 @@
     <title>Saikore</title>
     <link rel="stylesheet" href="css/mainsaikore.css">
     <style type="text/css">
+        /* Estilo general */
         body {
             color: white;
             background-image: url("img/universo.gif");
-            margin: 25px 0px 0px 0px;
-            padding: 0px;
-            font-family: "Comic Sans MS";
+            margin: 0;
+            padding: 0;
+            font-family: "Comic Sans MS", sans-serif;
         }
 
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0.5em;
+        }
+
+        /* Diseño para tablas retro */
         table {
             background: black;
             background-image: url("img/space.png");
             text-align: center;
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        td {
+            padding: 10px;
+            border: 2px solid white;
+        }
+
+        /* Diseño retro pero responsivo */
+        img {
+            max-width: 100%;
+        }
+
+        marquee {
+            font-size: 1.2em;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .middle {
+            text-align: center;
+            padding: 20px;
+        }
+
+        audio {
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* Estilo para móviles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            table {
+                width: 100%;
+                font-size: 0.9em;
+            }
+
+            td {
+                padding: 5px;
+            }
+
+            marquee {
+                font-size: 1em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Ocultar las imágenes StarRed en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .hide-on-small {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -38,62 +111,71 @@
 
     <section class="header">
         <center>
-            <br>
-            <h1 style="color: white;"><img src="img/usbicon.gif" alt="tijeras" height="28px"> Welcome to Saikore</h1>
-            <marquee behavior="" direction="left">
-                <h3 style="color: white;">No por querer más podemos algo más que querer</h3>
+            <h1><img src="img/usbicon.gif" alt="usbicon" height="28px"> Welcome to Saikore</h1>
+            <marquee behavior="scroll" direction="left">
+                <h3>No por querer más podemos algo más que querer</h3>
             </marquee>
         </center>
     </section>
 
     <div class="middle">
-        <br>
-        <img src="img/StarRed.gif" align="left" height="200px">
-        <img src="img/StarRed.gif" align="right" height="200px">
-        <table border="5" cellpadding="0" cellspacing="0" align="center">
+        <img src="img/StarRed.gif" class="hide-on-small" align="left" height="200">
+        <img src="img/StarRed.gif" class="hide-on-small" align="right" height="200">
+        <table>
             <tbody>
-                <tr height="50px">
+                <tr>
                     <td colspan="4">
-                        <h2 style="margin: 0px">Bienvenido!</h2>
+                        <h2>Bienvenido!</h2>
                     </td>
                 </tr>
-                <tr height="150px">
+                <tr>
                     <td><a href="aboutme.html">Acerca de</a></td>
                     <td><a href="bds2.html">Blog de Saiko</a></td>
                     <td><a href="https://spacehey.com/wolfofdoom">SpaceHey!</a></td>
-                    <td><a href="4reals.html">Los Reales</a></td>
+                    <td><a href="broken">Los Reales</a></td>
                 </tr>
-                <tr height="50px">
+                <tr>
                     <td colspan="4">
-                        <h2 style="margin: 0px">Avanzar...</h2>
+                        <h2>Avanzar...</h2>
                     </td>
                 </tr>
-                <tr height="150px">
-                    <td colspan="4"><a href="AeroFrutasIntro.html"><img src="img/ostan-madobe.gif" height="150px" alt
-                                title="Avanza de epoca..."></a>
+                <tr>
+                    <td colspan="4"><a href="AeroFrutasIntro.html"><img src="img/ostan-madobe.gif" alt="Avanza de época"
+                                height="100"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <br>
-        <center>
 
-            <p><i>No hay vuelta atras</i></p>
-            <p>
-                <audio src="djmorfiusyelpelondelmaicrofonyunou/yourloveismydrug.mp3" controls autoplay loop
-                    preload="auto">
-                </audio>
-            </p>
+        <p><i>No hay vuelta atrás</i></p>
+        <audio src="djmorfiusyelpelondelmaicrofonyunou/yourloveismydrug.mp3" controls autoplay loop
+            preload="auto"></audio>
 
-            <p>Sitios web geniales y de amigos:</p>
-            <a href="http://peachycatto.raspberryip.com">
-                <p>
-                    <font color="pink">* Aqui va el banner de Catto cuando me lo entregue ptm apurate we *</font>
-                </p>
-            </a>
-
-        </center>
+        <p>Un sitio rancio:</p>
+        <a href="http://peachycatto.raspberryip.com">
+            <img src="img/cattito.png" alt="usbicon" height="100px" id="Catto">
+        </a>
     </div>
+
+    <script>
+        // Selecciona la imagen central
+        const cattitoA = document.getElementById('Catto');
+
+        // Define las rutas para las imágenes original y la de reemplazo
+        const imagenOriginal = 'img/cattito.png';
+        const imagenReemplazo = 'img/cattito2.png';
+
+        cattitoA.addEventListener('mouseover', () => {
+            cattitoA.src = imagenReemplazo;
+            cattitoA.classList.add('hidden');
+        });
+
+        // Restaura la imagen original y muestra la pierna izquierda cuando el cursor sale
+        cattitoA.addEventListener('mouseout', () => {
+            cattitoA.src = imagenOriginal;
+            cattitoA.classList.remove('hidden');
+        });
+    </script>
 </body>
 
 </html>
