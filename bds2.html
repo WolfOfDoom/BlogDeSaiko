@@ -27,8 +27,72 @@
             /* font-family: "Comic Sans MS"; */
         }
 
+
+        /* Imágenes responsivas */
         img {
             margin: 0px 0px 0px 0px;
+        }
+
+        /* Ajustes para el contenedor principal (Post) */
+        .post {
+            max-width: 90%;
+            /* Reduce el ancho en pantallas pequeñas */
+            width: 640px;
+            /* Ancho predeterminado para pantallas grandes */
+            margin: 20px auto;
+            /* Centrado horizontal */
+            padding: 20px;
+            box-sizing: border-box;
+            /* Asegura que padding no afecte el tamaño total */
+        }
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .post {
+                width: 100%;
+                /* Ocupa todo el ancho de la pantalla */
+                padding: 15px;
+                /* Menor padding para pantallas pequeñas */
+            }
+
+            /* Ocultar imágenes laterales en pantallas pequeñas */
+            .post img {
+                display: none;
+            }
+
+            h1,
+            h2,
+            p {
+                font-size: 90%;
+                /* Reduce el tamaño del texto */
+            }
+        }
+
+        /* Ajustes para pantallas extra pequeñas */
+        @media (max-width: 480px) {
+            body {
+                margin: 10px 0;
+                /* Reducir márgenes globales */
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                /* Ajustar encabezados */
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+                /* Texto más pequeño */
+            }
+
+            .post {
+                padding: 10px;
+                /* Ajustar relleno en pantallas muy pequeñas */
+            }
         }
 
         .table1 {
@@ -122,18 +186,18 @@
         <h1 style="padding: 5px" align="center">el blog más epico del mundo</h1>
         <div class="post" style="height: auto;">
             <center>
-                <img align="left" src="img/communist-ldf-logo.gif" height="100">
-                <img align="right" src="img/communist-ldf-logo.gif" height="100">
-                <h1>MÁS PAGINAS</h1>
-                <h2>01/07/2024</h2>
+                <img class="side-logo" align="left" src="img/communist-ldf-logo.gif" height="100">
+                <img class="side-logo" align="right" src="img/communist-ldf-logo.gif" height="100">
+                <h1>新しいページ ! ! !</h1>
+                <h2>25/11/2024</h2>
                 <br>
-                <p>bUENAS TARdes</p>
-                <p>nomas pa decir a quien sea que lea esto</p>
-                <p>q agregue paginas nuevas al sitio.</p>
-                <p>Estoy comenzando a usar más estilos al azar</p>
-                <p>y aunque siento que estoy comenzando a desviarme del tema que tenia primero</p>
-                <p>tambn siento que es una evolución para bien</p>
-                <p>bueno, es todo lo que tenia que decir, hoy les dejo un spoiler del sitio nuevo si no lo habian visto:
+                <p>Un post más mi gente</p>
+                <p>se han agregado más paginas</p>
+                <p>un nuevo sitio que emula como se veía la web nipona antes</p>
+                <p>tiene algunas subpaginas que voy implementando con el tiempo</p>
+                <p>también estoy trabajando en hacer el sitio web completo compatible</p>
+                <p>con moviles, para poder promocionarlo más</p>
+                <p>de momento eso es todo, espero les agrade todo esto, si no chinguen a su madre
                 </p> <br>
 
                 <img src="img/calacavw.gif" width="100px" height="100px" alt="">
