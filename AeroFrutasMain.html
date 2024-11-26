@@ -25,20 +25,85 @@
         body {
             background: url(img/frutiger.webp);
             background-size: cover;
-            background-repeat: no-repeat;
             margin: 0;
-            cursor: url("img/cursorw7.gif");
+            cursor: url("img/cursorw7.gif"), auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        .tdsb {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .tdsb img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .tdsb {
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .container h1 {
+                font-size: 1.5rem;
+            }
+
+            .tdsb img {
+                max-width: 70%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1rem;
+            }
+
+            .container h1 {
+                font-size: 1.2rem;
+            }
+
+            .buttons button {
+                font-size: 1rem;
+            }
+
+            .tdsb img {
+                max-width: 60%;
+            }
         }
     </style>
 </head>
 
 <body>
     <center>
-        <div class="card" style="height: auto;">
-            <table class="glassy" border="1" cellpadding="0" cellspacing="0" align="center">
+        <div class="card">
+            <table class="glassy" border="1" cellpadding="0" cellspacing="0">
                 <tbody>
-                    <tr height="50px">
-                        <td style="background-color: rgba(7, 59, 104, 0.616);">
+                    <tr>
+                        <td style="background-color: rgba(40, 42, 44, 0.219);">
                             <h2 class="Titular" style="margin: 0px;">Welcome to Saikore v0.7</h2>
                         </td>
                     </tr>
@@ -46,10 +111,10 @@
             </table>
         </div>
         <br>
-        <div class="card" style="height: auto;">
+        <div class="card">
             <table class="glassy" border="1" cellpadding="0" cellspacing="0" align="center">
                 <tbody>
-                    <tr height="50px">
+                    <tr>
                         <td class="tdsb" colspan="4">
                             <h2 style="margin: 0px">Bienvenido!</h2>
                         </td>
@@ -58,12 +123,14 @@
                         <td class="tdsb">
                             <a href="MásInfo.html">
                                 <img src="img/info.png" height="40px" width="40px" alt title="i"><br>
-                                Más sobre mi</a>
+                                Más sobre mi
+                            </a>
                         </td>
                         <td class="tdsb">
                             <a href="Proyectos.html">
                                 <img src="img/defrag.png" height="50px" width="50px" alt title="Portafolio"><br>
-                                Proyectos</a>
+                                Proyectos
+                            </a>
                         </td>
                         <td class="tdsb"><a href="SaikoWorld4.html">???</a></td>
                         <td class="tdsb"><a href="NotDreams.html">
@@ -71,13 +138,9 @@
                                 Dreams</a>
                         </td>
                     </tr>
-                    <tr height="50px">
-                        <td class="tdsb" colspan="4">
-                            <h2 style="margin: 0px">Avanzar...</h2>
-                        </td>
-                    </tr>
                     <tr height="150px">
-                        <td class="tdsb" colspan="4"><a href="Experience.html">
+                        <td class="tdsb" colspan="4">
+                            <a href="Experience.html">
                                 <img src="img/ES.webp" height="200px" width="150px" alt title="Avanza de epoca...">
                             </a>
                         </td>
@@ -85,15 +148,12 @@
                 </tbody>
             </table>
         </div>
-        <a href="MainSaikore.html" class="glass"> Downgrade </a><br><br>
+        <a href="MainSaikore.html" class="glass"> Downgrade </a><br>
 
         <div class="container">
             <audio></audio>
-
             <h1>Song</h1>
-
             <div id="current_time">0:00</div>
-
             <div class="buttons">
                 <button id="prev">
                     <i class="fas fa-backward"></i>
@@ -105,15 +165,11 @@
                     <i class="fas fa-forward"></i>
                 </button>
             </div>
-
             <div id="current_audio"></div>
-
             <div class="progress_container">
                 <div id="progress"></div>
             </div>
-
         </div>
-
 
         <script src="Scripts/reproafm.js"></script>
     </center>
