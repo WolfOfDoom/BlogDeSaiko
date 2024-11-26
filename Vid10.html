@@ -16,16 +16,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/windows.png" type="image/x-icon">
     <title>Eres recompensado................</title>
+    <style>
+        /* Estilo general */
+        body {
+            background: url('img/universo.gif');
+            margin: 0;
+            color: white;
+        }
+
+        marquee {
+            font-size: 1.2rem;
+        }
+
+        video {
+            max-width: 20%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        a h2 {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            marquee {
+                font-size: 1rem;
+            }
+
+            a h2 {
+                font-size: 1.2rem;
+            }
+
+            video {
+                max-width: 50%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            marquee {
+                font-size: 0.9rem;
+            }
+
+            a h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
-<body background="img/universo.gif">
-
+<body>
     <marquee behavior="" direction="left">
         <h3 style="color: white;">¡Haz encontrado un video!</h3>
     </marquee>
     <center>
-        <video src="Vidios/carretera.mp4" autoplay loop height="700px"></video>
-        <a style="color: #fff;" href="Watchlist.html">
+        <video src="Vidios/carretera.mp4" autoplay loop controls></video>
+        <a href="Watchlist.html">
             <h2> Mírate en el espejo de tu alma y hallarás las respuestas que buscas. </h2>
         </a>
     </center>
