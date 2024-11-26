@@ -17,53 +17,97 @@
     <link rel="shortcut icon" href="img/windows.png" type="image/x-icon">
     <title>Saikore?</title>
     <link rel="stylesheet" href="css/cursor1.css">
+    <style>
+        body {
+            background: url('img/universo.gif');
+            background-size: auto;
+            margin: 0;
+            color: white;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main-content h1 img {
+            vertical-align: middle;
+        }
+
+        .warning {
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .main-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .main-content blockquote {
+                font-size: 0.9rem;
+            }
+
+            header nav a img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 
-<body background="img/universo.gif">
-    <header>
-        <nav align="center">
-            <a style="color: white;" href="index.html"><img src="img/madotsuki knife.gif" alt="madotsuki" height="30">
-                Volver <img src="img/madotsuki knife.gif" alt="madotsuki" height="30"></a>
-            <p align="right">
-                <a href="SaikoWorld.html"><img src="img/watermelonwolf.png" alt title="Lobito Sandia"
-                        alt="lobito_sandia" width="50" height="50"></a>
-                <audio src="djmorfiusyelpelondelmaicrofonyunou/aquatic ambience.mp3" controls autoplay loop
-                    preload="auto">
-                </audio>
-            </p>
-        </nav>
-    </header>
+<body>
+    <a href="SaikoWorld.html">
+        <img src="img/watermelonwolf.png" alt="Lobito Sandía" width="50" height="50">
+    </a>
+    <audio src="djmorfiusyelpelondelmaicrofonyunou/aquaticambience.mp3" controls autoplay loop preload="auto">
+    </audio>
 
-    <section class="header">
-        <center>
-            <br>
-            <h1 style="color: white;"><img src="img/tijerasR.gif" alt="tijeras">
-                Usted esta entrando a Saikore </h1>
-            <marquee behavior="" direction="left">
-                <h3 style="color: white;">Tengo ansias por tener recuerdos con fecha de caducidad.</h3>
-            </marquee>
-            <a href="MainSaikore.html"><img src="img/internet-explorer.gif" alt title="Avanza!" alt="???" width="50"
-                    height="50"></a>
-            <blockquote style="color: white;">
-                <img src="img/estrella.gif" alt="stars"> El disco duro de tu ordenador <img src="img/estrella.gif"
-                    alt="stars"><br>
-                <img src="img/estrella.gif" alt="stars"> No entiende los versos de este poeta <img
-                    src="img/estrella.gif" alt="stars"><br>
-                <img src="img/estrella.gif" alt="stars"> Esta letra, nació de una cicatriz <img src="img/estrella.gif"
-                    alt="stars"><br>
-                <img src="img/estrella.gif" alt="stars"> Allí donde mi herida se junta con la vuestra <img
-                    src="img/estrella.gif" alt="stars"><br>
-            </blockquote>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <i>
-                <p style="color: white;">ADVERTENCIA:</p>
-            </i>
-            <i style="color: white;">Este sitio está diseñado para visualizarse en una pantalla de resolución
-                1920x1080</i><br>
-            <i style="color: white;"> y computadora, en algunas otras resoluciones puede haber errores visuales, quedas
-                advertido.</i>
-        </center>
+    <section class="main-content">
+        <h1>
+            <img src="img/tijerasR.gif" alt="tijeras">
+            Usted está entrando a Saikore
+        </h1>
+        <marquee behavior="" direction="left">
+            <h3 class="quote">Tengo ansias por tener recuerdos con fecha de caducidad.</p>
+        </marquee>
+        <a href="MainSaikore.html">
+            <img src="img/internet-explorer.gif" alt="Avanza!" width="50" height="50">
+        </a>
+        <blockquote style="color: white;">
+            <img src="img/estrella.gif" alt="stars"> El disco duro de tu ordenador <img src="img/estrella.gif"
+                alt="stars"><br>
+            <img src="img/estrella.gif" alt="stars"> No entiende los versos de este poeta <img src="img/estrella.gif"
+                alt="stars"><br>
+            <img src="img/estrella.gif" alt="stars"> Esta letra, nació de una cicatriz <img src="img/estrella.gif"
+                alt="stars"><br>
+            <img src="img/estrella.gif" alt="stars"> Allí donde mi herida se junta con la vuestra <img
+                src="img/estrella.gif" alt="stars"><br>
+        </blockquote>
     </section>
+    <footer>
+        <section class="warning">
+            <p>ADVERTENCIA:</p>
+            <p>Este sitio está diseñado para visualizarse en una pantalla de resolución 1920x1080 en computadora. Se
+                esta trabajando para que pueda visualizarse en movil por completo sin errores visuales</p>
+        </section>
+    </footer>
 </body>
 
 </html>

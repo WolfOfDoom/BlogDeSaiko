@@ -17,19 +17,67 @@
     <link rel="shortcut icon" href="img/interrogation.png" type="image/x-icon">
     <link rel="stylesheet" href="css/GlassStyle_Yes.css">
     <link rel="stylesheet" href="css/GlassStyle_No.css">
-    <title>???</title>
+    <title>?</title>
+    <style>
+        /* Estilo base */
+        body {
+            background: url('img/buscaminas.webp');
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            /* Centrar el contenido del cuerpo */
+        }
+
+        div {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        video {
+            max-width: 35%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            /* Espaciado entre el video y los botones */
+        }
+
+        /* Media Queries para hacer la página responsive */
+        @media (max-width: 768px) {
+            video {
+                max-height: 300vh;
+                /* Ajusta la altura en pantallas pequeñas */
+            }
+
+            .glassy,
+            .glassn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .glassy,
+            .glassn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
 </head>
 
-
-<body background="img/buscaminas.webp">
-
-    <center>
-        <video src="Vidios/pecsi.mp4" autoplay loop height="700px"></video><br>
+<body>
+    <div>
+        <video src="Vidios/pecsi.mp4" autoplay loop controls></video> <br>
         <a href="Vid5.html" class="glassy"> Si </a>
         <a href="NotDreamsPlease.html" class="glassn"> No </a>
-    </center>
-
-
+    </div>
 </body>
 
 </html>
