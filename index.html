@@ -1,113 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-FWT5QJ8WJC');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/windows.png" type="image/x-icon">
-    <title>Saikore?</title>
-    <link rel="stylesheet" href="css/cursor1.css">
+    <title>Cambio de Imagen</title>
     <style>
         body {
-            background: url('img/universo.gif');
-            background-size: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            color: white;
+            background-color: #000000;
+            font-family: Arial, sans-serif;
         }
 
-        header nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
+        img {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        header nav a {
-            text-decoration: none;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .main-content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .main-content h1 img {
-            vertical-align: middle;
-        }
-
-        .warning {
-            font-style: italic;
-            text-align: center;
-            padding: 10px;
-        }
-
-        /* Responsividad */
-        @media (max-width: 768px) {
-            .main-content h1 {
-                font-size: 1.5rem;
-            }
-
-            .main-content blockquote {
-                font-size: 0.9rem;
-            }
-
-            header nav a img {
-                width: 40px;
-                height: 40px;
-            }
+        img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
-    <a href="SaikoWorld.html">
-        <img src="img/watermelonwolf.png" alt="Lobito Sandía" width="50" height="50">
-    </a>
-    <audio src="djmorfiusyelpelondelmaicrofonyunou/aquaticambience.mp3" controls autoplay loop preload="auto">
-    </audio>
+    <img id="imagen" src="img/button.png" alt="Imagen inicial" onclick="cambiarImagen()">
 
-    <section class="main-content">
-        <h1>
-            <img src="img/tijerasR.gif" alt="tijeras">
-            Usted está entrando a Saikore
-        </h1>
-        <marquee behavior="" direction="left">
-            <h3 class="quote">Tengo ansias por tener recuerdos con fecha de caducidad.</p>
-        </marquee>
-        <a href="MainSaikore.html">
-            <img src="img/internet-explorer.gif" alt="Avanza!" width="50" height="50">
-        </a>
-        <blockquote style="color: white;">
-            <img src="img/estrella.gif" alt="stars"> El disco duro de tu ordenador <img src="img/estrella.gif"
-                alt="stars"><br>
-            <img src="img/estrella.gif" alt="stars"> No entiende los versos de este poeta <img src="img/estrella.gif"
-                alt="stars"><br>
-            <img src="img/estrella.gif" alt="stars"> Esta letra, nació de una cicatriz <img src="img/estrella.gif"
-                alt="stars"><br>
-            <img src="img/estrella.gif" alt="stars"> Allí donde mi herida se junta con la vuestra <img
-                src="img/estrella.gif" alt="stars"><br>
-        </blockquote>
-    </section>
-    <footer>
-        <section class="warning">
-            <p>ADVERTENCIA:</p>
-            <p>Este sitio está diseñado para visualizarse en una pantalla de resolución 1920x1080 en computadora. Se
-                esta trabajando para que pueda visualizarse en movil por completo sin errores visuales</p>
-        </section>
-    </footer>
+    <script>
+        function cambiarImagen() {
+            const imagen = document.getElementById('imagen');
+            imagen.src = 'img/buttonpress.png'; // Cambia la ruta por la de tu nueva imagen
+
+            // Redirige a otra página después de 2 segundos
+            setTimeout(() => {
+                window.location.href = 'Saikore.html'; // Cambia por tu URL
+            }, 1000);
+        }
+    </script>
 </body>
 
 </html>
