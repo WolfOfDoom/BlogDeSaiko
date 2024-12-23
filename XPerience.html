@@ -11,6 +11,7 @@
     gtag('config', 'G-FWT5QJ8WJC');
 </script>
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,23 +24,117 @@
             background: url(img/dzcr.png);
             background-size: cover;
             background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
             margin: 0;
-
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
         .contenedor {
-            position: relative;
-            height: 100vh;
-            /* Altura del contenedor */
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .centrado {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50%;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .aesthetic-windows-xp-modal {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .aesthetic-windows-xp-modal-title-bar {
+            width: 100%;
+        }
+
+        .aesthetic-windows-xp-modal-title-bar-text {
+            font-size: clamp(0.7rem, 1.5vw, 1rem);
+            white-space: normal;
+            line-height: 1.2;
+            padding: 5px 10px;
+        }
+
+        .aesthetic-windows-xp-modal-content {
+            padding: 20px;
             text-align: center;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            line-height: 1.4;
+        }
+
+        .poem-content {
+            display: inline-block;
+            margin: 0 auto;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .audio-container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        audio {
+            max-width: 100%;
+            margin: 10px auto;
+        }
+
+        /* Media queries */
+        @media screen and (max-width: 768px) {
+            .centrado {
+                width: 95%;
+            }
+
+            .aesthetic-windows-xp-modal-content {
+                padding: 15px;
+            }
+
+            .audio-container {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .aesthetic-windows-xp-modal-content {
+                padding: 10px;
+            }
+
+            .aesthetic-windows-xp-modal-title-bar-text {
+                font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+            }
+        }
+
+        @media screen and (max-height: 600px) {
+            .aesthetic-windows-xp-modal-content {
+                padding: 10px;
+                font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+            }
+
+            br {
+                line-height: 1.2;
+            }
+
+            .audio-container {
+                padding: 5px;
+            }
         }
     </style>
 </head>
@@ -48,10 +143,8 @@
     <div class="contenedor">
         <div class="centrado">
             <div class="aesthetic-windows-xp-modal">
-
                 <!-- Title Bar -->
                 <div class="aesthetic-windows-xp-modal-title-bar">
-
                     <div class="aesthetic-windows-xp-modal-title-bar-text">
                         Desear más no nos otorga más que el propio deseo, un eco perpetuo en el vasto abismo del anhelo.
                     </div>
@@ -60,31 +153,23 @@
                         <div class="aesthetic-windows-xp-button-title-bar">
                             <a href="SaikoWorld6.html">
                                 <button>
-                                    <font color="white">
-                                        _
-                                    </font>
+                                    <font color="white">_</font>
                                 </button>
                             </a>
                         </div>
                         <div class="aesthetic-windows-xp-button-title-bar-close">
                             <a href="Dazecore.html">
                                 <button>
-                                    <font color="white">
-                                        X
-                                    </font>
+                                    <font color="white">X</font>
                                 </button>
                             </a>
                         </div>
                     </div>
-
                 </div>
 
-
                 <!-- Content -->
-                <!-- Could be a tabbed container, or a set of dropdowns, etc... -->
                 <div class="aesthetic-windows-xp-modal-content">
-
-                    <div>
+                    <div class="poem-content">
                         En la quietud de la noche susurrante,<br>
                         nuestros deseos se alzan como estrellas fugaces. <br>
                         Buscamos más en un cielo distante,<br>
@@ -103,24 +188,19 @@
                         Así, seguimos, soñando y anhelando, <br>
                         perdiéndonos en el eco de nuestro propio querer. <br>
                         Pero al final, es la acción la que va forjando, <br>
-                        los senderos del destino que debemos recorrer. <br><br><br>
+                        los senderos del destino que debemos recorrer. <br><br>
 
-                        <i>-Saiko</i><br><br>
+                        <div class="author">-Saiko</div>
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
     </div>
-    <center>
-        <p>
-            <audio src="djmorfiusyelpelondelmaicrofonyunou/Koyuki Kazahana.mp3  " controls autoplay loop preload="auto">
-            </audio>
-        </p>
-    </center>
+
+    <div class="audio-container">
+        <audio src="djmorfiusyelpelondelmaicrofonyunou/Koyuki Kazahana.mp3" controls autoplay loop preload="auto">
+        </audio>
+    </div>
 </body>
 
 </html>
