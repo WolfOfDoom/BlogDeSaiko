@@ -1,0 +1,249 @@
+/* Restablecemos las reglas generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #800000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 800px;
+    background-color: #660000;
+    border: 2px solid #990000;
+    box-shadow: 0 0 10px black;
+}
+
+.header {
+    background-color: #330000;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.main-content {
+    display: flex;
+}
+
+.left-section,
+.right-section {
+    padding: 20px;
+}
+
+.left-section {
+    width: 30%;
+    text-align: center;
+    border-right: 1px solid #990000;
+}
+
+.lock-icon {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.payment-info,
+.loss-info {
+    margin-bottom: 20px;
+    display: flex;
+    /* Hacemos flexibles las secciones */
+    align-items: center;
+    /* Alineamos verticalmente */
+    justify-content: flex-end;
+    /* Alineamos horizontalmente hacia la izquierda */
+}
+
+.payment-info h3,
+.loss-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    background-color: #330000;
+    padding: 10px;
+    border: 1px solid #990000;
+    flex: 1;
+    /* Esto hace que el texto ocupe el espacio restante */
+}
+
+.countdown p {
+    margin: 5px 0;
+}
+
+.progress-bar {
+    width: 30px;
+    height: 150px;
+    background: linear-gradient(to top, red, green);
+    margin-right: 15px;
+    /* Espacio entre la barra y el texto */
+    border: 1px solid #990000;
+}
+
+.right-section {
+    width: 70%;
+}
+
+a {
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.bitcoin-address {
+    background-color: #330000;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.bitcoin-address span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bitcoin-address input {
+    width: 100%;
+    padding: 5px;
+    background-color: #990000;
+    border: none;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #330000;
+}
+
+footer button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+footer button:hover {
+    background-color: #cc0000;
+}
+
+/* Iframe Section */
+.iframe-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+iframe {
+    width: 100%;
+    height: 450px;
+    border: 1px solid #990000;
+    background-color: #330000;
+}
+
+/* Bitcoin Section */
+.bitcoin-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid white;
+}
+
+.bitcoin-image img {
+    width: 100px;
+    height: auto;
+}
+
+.bitcoin-text {
+    flex: 1;
+
+}
+
+.bitcoin-text hr {
+    border: none;
+    height: 1px;
+    background-color: #990000;
+    margin-bottom: 10px;
+}
+
+code {
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.textbox-container input {
+    width: 100%;
+    /* Ajusta al 100% del contenedor */
+    max-width: 350px;
+    /* Tamaño máximo del input */
+    background-color: #660000;
+    /* Fondo similar */
+    color: white;
+    /* Texto blanco */
+    border: 1px solid #ffffff;
+    /* Borde rojo oscuro */
+    padding: 5px;
+    /* Espaciado interno */
+    font-family: Arial, sans-serif;
+    /* Fuente del texto */
+    font-size: 14px;
+    /* Tamaño de la fuente */
+}
+
+.copy-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Espaciado entre el input y el botón */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .payment-info,
+    .loss-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .progress-bar {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    iframe {
+        height: 200px;
+    }
+
+    .bitcoin-image img {
+        width: 40px;
+    }
+}
