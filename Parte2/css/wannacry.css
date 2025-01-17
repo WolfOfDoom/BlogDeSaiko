@@ -44,7 +44,6 @@ body {
 .left-section {
     width: 30%;
     text-align: center;
-    border-right: 1px solid #990000;
 }
 
 .lock-icon {
@@ -72,7 +71,7 @@ body {
 .countdown {
     background-color: #330000;
     padding: 10px;
-    border: 1px solid #990000;
+    border: 1px solid #ffffff;
     flex: 1;
     /* Esto hace que el texto ocupe el espacio restante */
 }
@@ -87,7 +86,7 @@ body {
     background: linear-gradient(to top, red, green);
     margin-right: 15px;
     /* Espacio entre la barra y el texto */
-    border: 1px solid #990000;
+    border: 1px solid #ffffff;
 }
 
 .right-section {
@@ -103,10 +102,23 @@ h2 {
     margin-bottom: 10px;
 }
 
+h3 {
+    color: yellow;
+}
+
+h4 {
+    color: yellow;
+}
+
 p {
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 20px;
+}
+
+.doto400 {
+    font-family: "Doto", serif;
+    font-size: 20px;
 }
 
 .bitcoin-address {
