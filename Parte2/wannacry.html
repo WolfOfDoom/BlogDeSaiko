@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWT5QJ8WJC"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-FWT5QJ8WJC');
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanna Decrypt0r 2.0</title>
+    <link rel="shortcut icon" href="../img/hands.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/wannacry.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <span>Wana Decrypt0r 2.0</span>
+        </header>
+        <main class="main-content">
+            <div class="left-section">
+                <img src="../img/candao.png" alt="Lock Icon" class="lock-icon">
+                <div class="payment-info">
+                    <div class="countdown">
+                        <h3>Payment will be raised on</h3>
+                        <p>5/15/2025 23:59:59</p>
+                        <p>Time Left</p>
+                        <p id="countdown-1">999:99:99:99</p>
+                    </div>
+                    <div class="progress-bar"></div>
+                </div>
+
+                <div class="loss-info">
+                    <div class="countdown">
+                        <h3>Your files will be lost on</h3>
+                        <p>5/19/2025 23:59:59</p>
+                        <p>Time Left</p>
+                        <p id="countdown-2">999:99:99:99</p>
+                    </div>
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="iframe-section">
+                <iframe src="wannasmile.html" title="Info" frameborder="0"></iframe>
+                <div class="bitcoin-section">
+                    <div class="bitcoin-image">
+                        <img src="../img/bitcoin.png" alt="Bitcoin">
+                    </div>
+                    <div class="bitcoin-text">
+                        <hr>
+                        Send $300 worth of bitcoin to this address:
+
+                        <div class="textbox-container">
+                            <input type="text" id="text-to-copy" value="UmVzdGFuIDMgcGlzdGFzIG3DoXM=" disabled>
+                        </div>
+
+                        <div class="copy-container">
+                            <button id="copy-button">Copy</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <a href="https://youtu.be/dQw4w9WgXcQ">
+                <button>Check Payment</button>
+            </a>
+            <a href="retropon.html">
+                <button>Decrypt</button>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Obtén el botón y el texto
+        const copyButton = document.getElementById('copy-button');
+        const textToCopy = document.getElementById('text-to-copy').value;
+
+        // Agrega un evento al botón
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(textToCopy) // Copia el texto al portapapeles
+                .then(() => {
+                    alert('15. Que la búsqueda de la verdad sea siempre más fuerte que el miedo a la duda.'); // Muestra un mensaje de éxito
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        });
+
+        // Función para iniciar un countdown
+        function startCountdown(targetDate, displayElementId) {
+            const targetTime = new Date(targetDate).getTime();
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const remainingTime = targetTime - now;
+
+                if (remainingTime <= 0) {
+                    clearInterval(interval);
+                    document.getElementById(displayElementId).innerText = "00:00:00:00";
+                    return;
+                }
+
+                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                const formattedTime = `${days}:${hours.toString().padStart(2, '0')}:${minutes
+                    .toString()
+                    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                document.getElementById(displayElementId).innerText = formattedTime;
+            }, 1000);
+        }
+
+        // Fechas objetivo
+        const paymentRaiseDate = "2025-05-15T23:59:59";
+        const fileLossDate = "2025-05-19T23:59:59";
+
+        // Inicia los countdowns
+        startCountdown(paymentRaiseDate, "countdown-1");
+        startCountdown(fileLossDate, "countdown-2");
+
+    </script>
+
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/4feUSTS21-8//?&;amp;;autoplay=1&;loop=1&;controls=1"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+        loading="lazy">
+    </iframe>
+
+</body>
+
+</html>
