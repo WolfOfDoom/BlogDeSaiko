@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altar Digital con Pétalos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8d9e0;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Georgia', serif;
+    }
+
+    .petal {
+      position: absolute;
+      top: -10%;
+      width: 50px;
+      height: 50px;
+      background-image: url('../img/petalos.gif');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+      }
+    }
+
+    /* Generadores de pétalos */
+    /* Puedes duplicar estas clases para más pétalos */
+    .petal:nth-child(1)  { left: 5%;  animation-duration: 8s; animation-delay: 0s; }
+    .petal:nth-child(2)  { left: 25%; animation-duration: 12s; animation-delay: 2s; }
+    .petal:nth-child(3)  { left: 45%; animation-duration: 9s; animation-delay: 4s; }
+    .petal:nth-child(4)  { left: 65%; animation-duration: 11s; animation-delay: 1s; }
+    .petal:nth-child(5)  { left: 85%; animation-duration: 10s; animation-delay: 3s; }
+
+    .note {
+      position: relative;
+      z-index: 10;
+      background-image: url('https://e7.pngegg.com/pngimages/458/442/png-clipart-brown-printer-paper-paper-clip-letter-wood-sheet-of-stamps-old-page-texture-industry-thumbnail.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 90%;
+      max-width: 600px;
+      min-height: 70vh;
+      padding: 40px 30px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .note p {
+      font-size: 1.2rem;
+      color: #4b2e2e;
+      line-height: 1.6;
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .note {
+        padding: 20px;
+        min-height: auto;
+      }
+      .note p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Instancia varios pétalos según quieras -->
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <!-- Agrega más <div class="petal"></div> para más pétalos fluídos -->
+
+  <div class="note">
+  <div class="letter-text">
+    <p>Hola corazón mío, sinceramente no sé muy bien cómo comenzar esto. Te he dicho un montón de cosas que siento, siempre trato de decírtelo en el momento, ya que si me las guardo se me van a terminar olvidando. Me conozco... y no porque no me interese, sabes que soy un poco torpe y olvidadizo, en especial cuando estoy contigo. Haces que mis sentidos se entorpezcan. Por más que me trato de mantener atento, me termino disociando y dándote toda mi atención. A veces siento que tu voz está hecha para hipnotizar, porque eso es lo que haces conmigo.</p>
+
+    <p>Quisiera poder estar contigo el día de hoy. Quisiera poder abrazarte y besarte. Quisiera no tener que pensar que estamos a 700 kilómetros. Quiero poder, algún día, ser yo el que se burla de la distancia. Que nos tenga envidia de cómo somos capaces de expresar nuestro cariño en persona. Que el tiempo esté tan feliz que nos regale una oportunidad para detenerse y poder estar juntos más tiempo.</p>
+
+    <p>Quiero que sepas que estoy profundamente agradecido contigo. Por darme la confianza de que, a pesar de la distancia y el tiempo, me esperas al final del camino. Prometo no decepcionarte y siempre cuidar tus sentimientos, tu corazón a capa y espada, con mi vida, con mi orgullo. Quiero superar esta prueba que nos pone el universo. Poder estar juntos permanentemente, tomarnos de la mano y seguir sintiendo estas sensaciones únicas que sólo tú me provocas.</p>
+
+    <p>Te juro que a veces me desespero. Me siento harto de mirar el techo, de solo poder abrazar mis peluches. Pero, afortunadamente, cuando despierto está tu voz. Acompañándome. Relajándome. Dándome esa fuerza mental que necesito para seguir. Que me tranquiliza. Que me habla tan lindo. Quiero que seas tú siempre, hasta que mi alma desaparezca junto al polvo del cosmos.</p>
+
+    <p>Amo que sigas y me trates siempre muy lindo. Sé que a veces soy un poquitito dramático jaja... y sinceramente a veces me tomo las cosas muy a pecho en secreto. Pero es que contigo no me dura lo sentido, y jamás me había pasado eso con alguien. Una simple línea de texto que venga de tu chat dándome cariño es lo suficiente para borrarme pensamientos malos de mi mente. Ese es el nivel de confianza que te tengo, mi amor. Siento que eres la mujer definitiva, sin los defectos que contienen otras, con una belleza superior a las demás y que se complementa tan bien conmigo en bastantes aspectos.</p>
+
+    <p>Quiero que sigamos haciendo muchos recuerdos juntos. Que sigamos teniendo más madrugadas platicando y contándonos historias, abriendo nuestros corazones. Eres la primera vez que llego a llorar frente a mi pareja... si es que se puede considerar "frente" jaja. Pero el punto es que te diste cuenta. Sabes que muchas veces el sol se va en mi mente, se esconde y se pone a llover de la nada. Antes de conocerte me sentía muy triste y había noches donde lloraba hasta quedarme dormido. Cuando apareciste, incluso antes de ser pareja, que volvimos a hablar... todo eso se fue mágicamente. Lanzaste una cuerda hasta el fondo donde estaba y me ayudaste a salir, a subir junto a ti. Fuiste mi heroína. Realmente te veo como alguien muy admirable. Sé que me repito mucho pero quiero que siempre lo tengas bien claro: no importa qué tan roto haya estado, tú tienes esa paciencia. Y a mí me das esas ganas de reconstruirme. Juntos lo estamos haciendo muy bien. Eres un ángel. Mi ángel guardián. Ya estábamos destinados a estar juntos.</p>
+
+    <p>Gracias por ser tú en todo momento. Por darme el privilegio de poder ser tu pareja y disfrutar estos momentos tan lindos juntos. No quiero perder nunca tu manita. Siempre voy a tomarla con mucha fuerza y jamás se va a aflojar mi agarre.</p>
+
+    <p>Ya no somos dos niños como cuando nos conocimos. Ahora hemos crecido mucho y somos lo que vemos frente al espejo. Adultos jóvenes aún. Tal vez incluso nos falta crecer mentalmente, pero ya tenemos nuestras ideas claras. Sabemos qué es lo que queremos en nuestro futuro y planeamos cómo vamos a realizarlo. Quiero alguna vez tener a nuestras familias juntas en fiestas de fin de año. Poder ser siempre nosotros juntos los que luchemos contra los problemas. Pasar un verano juntos viajando, visitar muchos lugares… todo eso me hace mucha ilusión.</p>
+
+    <p>Gracias por leer estas líneas. He tratado de plasmar un poquito de todo lo que pienso, todos los pensamientos que pasan por mi cabeza cuando pienso en ti. Después de tanto caos, agradezco que me hayan mandado calma. Que te haya encontrado en mi vida. Eres única, siempre recuérdalo. Eres mía. Eres la única mujer que quiero en mi vida. Eres mi mayor tesoro que no quiero compartir con nadie.</p>
+
+    <p>Vamos por más recuerdos bonitos y fechas especiales juntos. Sigamos creciendo como personas siempre. Gracias por todo lo que haces por mí. Gracias por existir y por siempre querer seguir junto a mí, preciosa. Te agradezco todo infinitamente.</p>
+
+    <p style="margin-top: 2em; text-align: right;"><strong>– J💕</strong></p>
+  </div>
+</div>
+
+</body>
+</html>
