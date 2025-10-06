@@ -225,6 +225,35 @@
         <footer>– J🐺</footer>
     </main>
 
+
+    <!-- Contenedor para el reproductor -->
+    <div id="ytplayer"></div>
+
+    <!-- Script de la API de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '0',
+                width: '0',
+                videoId: 'k1Uq-selZFc',
+                playerVars: {
+                    autoplay: 1,
+                    loop: 1,
+                    controls: 1,
+                    playlist: 'k1Uq-selZFc' // necesario para loop
+                },
+                events: {
+                    onReady: function (event) {
+                        event.target.setVolume(5); // volumen al 5 %
+                        event.target.playVideo();
+                    }
+                }
+            });
+        }
+    </script>
+
     <script>
         // ====== 1) Lista de cartas ======
         const LETTERS = [
