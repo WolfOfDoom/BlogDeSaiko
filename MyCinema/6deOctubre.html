@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/eyei.png" type="image/x-icon">
+    <title>❤️Para Itzy❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8d9e0;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+        }
+
+        #heart-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            top: -2em;
+            animation-name: fallHeart;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fallHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+        .note {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 700px;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            background: linear-gradient(#ffffff, #fdf8f6);
+            /* papel claro */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid #e5d5cc;
+            margin: 60px auto;
+        }
+
+        .letter-text {
+            color: #4b2e2e;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: justify;
+            font-family: 'Georgia', serif;
+        }
+
+        .letter-text p {
+            margin-bottom: 1.6em;
+        }
+
+        @media (max-width: 480px) {
+            .note {
+                padding: 30px 20px;
+            }
+
+            .letter-text {
+                font-size: 1rem;
+            }
+        }
+
+        .note p {
+            font-size: 1.2rem;
+            color: #4b2e2e;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* relación 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="heart-rain"></div>
+
+    <div class="note">
+        <div class="letter-text">
+            <h1>6 de Septiembre del 2025</h1>
+            <p>Itzy, siempre es tan difícil comenzar a hacer una carta, primero quiero agradecerte por este segundo mes
+                a tu
+                lado, sinceramente creo que fue más largo esta vez o por lo menos así lo sentí yo, agradecerte por
+                siempre tener
+                la disposición de arreglar los problemas, de siempre quererme a mi y la todo lo bonito que tenemos, para
+                mi es
+                muy importante y valiente todo lo que hacer por nosotros todos los días, quiero también disculparme por
+                todas
+                las veces que he fallado, por las peleas que he comenzado, por las veces que te he hecho enojar, quiero
+                que
+                sepas que cada día estoy trabajando para ser una mejor persona para ti, no quiero que me veas igual,
+                quiero que
+                cada día de verdad notes que soy mejor porque me esfuerzo mucho.</p>
+
+            <p>Este mes de igual forma ha sido difícil para los dos, pero gracias a eso nos hemos conocido mucho más,
+                hemos
+                podido saber también como reaccionamos a diferentes situaciones por más difíciles que sean, me gusta el
+                nivel de
+                madurez con el que puedes llegar a pensar, me alegro de tener una mujer como tu para mi, como mi novia,
+                estoy
+                tan orgulloso de como eres y poder contarles a los demás sobre ti.</p>
+
+            <p>Eres la más linda flor del jardín, eres el primer rayo de sol que me ilumina mi cara cada mañana, eres
+                esa
+                canción que pongo en loop cada día sin que me aburra, eres lo que siempre he querido, eres lo que
+                siempre he
+                soñado, gracias por poder hacerme imaginar un nuevo futuro, un futuro tan brillante y colorido, me
+                encanta poder
+                pensar en que alguna vez vamos a estar juntos viviendo en la misma casita, con Don Pascual, viendo
+                alguna
+                película, jugando juntos, cualquier cosa que sea, yo la disfruto mucho si es contigo.</p>
+
+            <p>Estoy feliz de que seas tú, solo tú en mi corazón vas a estar siempre, te expresas tan lindo de mi
+                siempre,
+                paso los mejores momentos contigo y de verdad eso no lo cambiaría por nada en el mundo, yo quiero
+                casarme
+                contigo y tener ese futuro que siempre hemos deseado.</p>
+
+            <p>Perdona si esta carta no es tan larga como la anterior pero te prometo que la siguiente ya va a ser más
+                grande,
+                probablemente igual remodele mucho este apartado, lo trabaje más y todo eso, quiero hacerlo más bonito
+                así como
+                te lo mereces princesa, te amo Itzy</p>
+
+            <p style="margin-top: 2em; text-align: right;"><strong>– J🐺💕</strong></p>
+
+        </div>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/0-XdTLKNu90?autoplay=1&loop=1&controls=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy">
+            </iframe>
+        </div>
+
+
+        <center><a href="6deAgosto.html"><img src="../img/bears.gif" alt="osos sisisi" width="20%"></a></center>
+    </div>
+</body>
+
+<script>
+    const totalHearts = 35;
+    const heartContainer = document.getElementById("heart-rain");
+
+    for (let i = 0; i < totalHearts; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.textContent = "❤️";
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        heart.style.fontSize = `${Math.random() * 20 + 20}px`;
+        heartContainer.appendChild(heart);
+    }
+</script>
+
+</html>
