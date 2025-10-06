@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/eyei.png" type="image/x-icon">
+    <title>❤️‍🔥Nexo❤️‍🔥</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Spectral+SC&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --paper-bg-1: #fff8e9;
+            --paper-bg-2: #f7efde;
+            --paper-border: #e2c9a8;
+            --text: #3e2a23;
+            --title: #2b1c17;
+            --accent: #ff7a00;
+            --night-overlay: 0;
+            /* se ajusta con JS según la hora */
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--body-font, Georgia, serif);
+            color: #eadfd6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(1500px 800px at 10% -10%, rgba(255, 140, 0, 0.10), transparent 60%),
+                radial-gradient(1200px 700px at 110% 0%, rgba(255, 69, 0, 0.08), transparent 55%),
+                linear-gradient(180deg, #0b0615 0%, #120a24 55%, #0b0615 100%);
+            position: relative;
+        }
+
+        body::after {
+            /* Oscurecimiento nocturno dinámico */
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: rgba(0, 0, 0, var(--night-overlay));
+            z-index: 2;
+            transition: background 0.6s ease;
+        }
+
+        #emoji-rain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .spook {
+            position: absolute;
+            top: -2.5em;
+            animation: fall 8s linear infinite;
+            opacity: .9;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .25));
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-5vh) rotate(0)
+            }
+
+            100% {
+                transform: translateY(115vh) rotate(360deg);
+                opacity: 0
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 5;
+            width: min(760px, 92vw);
+            padding: 28px 24px 18px;
+            background: linear-gradient(var(--paper-bg-1), var(--paper-bg-2));
+            border: 1px solid var(--paper-border);
+            border-radius: 12px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .35);
+            color: var(--text);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            text-align: center;
+            font-family: var(--title-font, 'UnifrakturCook', cursive);
+            color: var(--title);
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, .25);
+        }
+
+        p.desc {
+            margin: 0 0 18px;
+            text-align: center;
+            opacity: .85
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 10px 0 18px;
+        }
+
+        .btn {
+            appearance: none;
+            border: 1px solid var(--paper-border);
+            background: #fffaf0;
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #fffdf6;
+            border: 1px solid var(--paper-border);
+        }
+
+        .badge {
+            font-family: 'Spectral SC', serif;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid #d6c2a6;
+            background: #fff9ec;
+            color: #4a342b;
+            font-size: .9rem;
+        }
+
+        footer {
+            margin-top: 14px;
+            text-align: center;
+            font-size: .9rem;
+            opacity: .7
+        }
+
+        /* En móvil, la lluvia va por encima del contenido y del overlay nocturno */
+        @media (max-width: 600px) {
+            #emoji-rain {
+                z-index: 9999;
+            }
+
+            .card {
+                z-index: 5;
+            }
+
+            /* se queda debajo de la lluvia */
+        }
+
+        /* ——— Bloqueo de tipografía para secciones específicas ——— */
+
+        /* Mantén la descripción con la fuente original (Georgia) */
+        .desc {
+            font-family: Georgia, serif !important;
+        }
+
+        /* Mantén la lista (y su contenido) con la fuente original */
+        .list,
+        .list *:not(.badge) {
+            font-family: Georgia, serif !important;
+        }
+
+        /* La “badge” puede quedarse con Spectral SC si te gusta el look del sello */
+        .badge {
+            font-family: 'Spectral SC', 'Noto Sans Mono', serif !important;
+            font-variant-numeric: lining-nums;
+            /* números alineados */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="emoji-rain"></div>
+
+    <main class="card">
+        <h1>Cartas para Itzy</h1>
+        <p class="desc">Aquí es el nexo donde se juntan todos los tiempos, presente, pasado y futuro.</p>
+
+        <!-- <div class="toolbar">
+            <button class="btn" id="toggleTheme">Forzar tema del mes</button>
+            <button class="btn" id="toggleNight">Simular noche</button>
+        </div>     
+
+
+        <div style="text-align:center; margin:10px 0 20px;">
+            <button id="demoThemeBtn" class="btn">🌤️ Probar siguiente mes</button>
+        </div>     -->
+
+        <!-- EDITA AQUÍ WEY-->
+        <ul class="list" id="lettersList"></ul>
+
+        <footer>– J🐺</footer>
+    </main>
+
+    <script>
+        // ====== 1) Lista de cartas ======
+        const LETTERS = [
+            { title: "Luv Sic (Pt. 2)", date: "2025-08-06", href: "6deAgosto.html", emoji: "🌻" },
+            { title: "Luv Sic (Pt. 3)", date: "2025-09-06", href: "6deSeptiembre.html", emoji: "🍂" },
+            { title: "Luv Sic (Pt. 4)", date: "2025-10-06", href: "6deOctubre.html", emoji: "🎃" },
+            // Ejemplo para futuras cartas:
+            // { title:"Luv Sic (Pt. 5)", date:"2025-11-06", href:"6deNoviembre.html", emoji:"💀" },
+        ];
+
+        function toLocalDate(isoYmd) {
+            const [y, m, d] = isoYmd.split('-').map(Number);
+            return new Date(y, m - 1, d); // crea la fecha en hora local, sin desplazamiento UTC
+        }
+
+
+        const listEl = document.getElementById("lettersList");
+        LETTERS.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+        <a href="${item.href}">
+          <span style="font-size:1.25rem">${item.emoji ?? "💌"}</span>
+          <span style="flex:1 1 auto;">${item.title}</span>
+          <span class="badge">
+          ${toLocalDate(item.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+          </span>
+        </a>
+      `;
+            listEl.appendChild(li);
+        });
+
+        // ====== 2) Carga del motor de temas ======
+        const script = document.createElement("script");
+        script.src = "theme.js";
+        script.onload = () => {
+            Theme.applyAutoTheme();
+            Theme.spawnEmojiRain(document.getElementById("emoji-rain"), 42);
+
+            // Botones demo pa cuando toque calar algo
+            document.getElementById("toggleTheme").onclick = () => {
+                Theme.applyAutoTheme(true); // fuerza re-evaluación
+            };
+            document.getElementById("toggleNight").onclick = () => {
+                Theme.simulateNightToggle(); // alterna overlay
+            };
+        };
+        document.body.appendChild(script);
+
+        // === DEMO DE TEMAS ===
+        let demoMonth = 1;
+
+        const btn = document.getElementById("demoThemeBtn");
+        btn.addEventListener("click", () => {
+            demoMonth++;
+            if (demoMonth > 12) demoMonth = 1;
+
+            // Creamos una fecha falsa para probar el mes
+            const fakeDate = new Date(2025, demoMonth - 1, 6);
+
+            // Forzamos que theme.js aplique ese mes
+            const t = Theme.applyAutoTheme(fakeDate);
+            Theme.spawnEmojiRain(document.getElementById("emoji-rain"), 42, fakeDate);
+
+            // Texto en consola para ver cuál es
+            console.log(`🎨 Tema demo: ${t.name || "Desconocido"} (${demoMonth})`);
+        });
+    </script>
+</body>
+
+</html>

@@ -5,53 +5,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../img/eyei.png" type="image/x-icon">
-    <title>❤️Para Itzy❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Spectral+SC&display=swap"
+        rel="stylesheet">
+    <title>🧡Para Itzy🖤</title>
+
     <style>
+        /* ===== Fondo Halloween ===== */
         body {
             margin: 0;
             padding: 0;
-            background-color: #f8d9e0;
-            position: relative;
+            /* Capa base oscura con gradiente "noche" */
+            background:
+                radial-gradient(1500px 800px at 10% -10%, rgba(255, 140, 0, 0.10), transparent 60%),
+                radial-gradient(1200px 700px at 110% 0%, rgba(255, 69, 0, 0.08), transparent 55%),
+                linear-gradient(180deg, #0b0615 0%, #120a24 55%, #0b0615 100%);
             min-height: 100vh;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Georgia', serif;
+            color: #eadfd6;
         }
 
-        #heart-rain {
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-conic-gradient(from 45deg, rgba(255, 255, 255, 0.03) 0 10deg, transparent 10deg 20deg);
+            mix-blend-mode: overlay;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        /* ===== Lluvia de emojis ===== */
+        #emoji-rain {
+            position: fixed;
+            inset: 0;
             pointer-events: none;
             z-index: 1;
+            /* Por defecto detrás de la nota */
             overflow: hidden;
         }
 
-        .heart {
+        .spook {
             position: absolute;
-            top: -2em;
-            animation-name: fallHeart;
+            top: -2.5em;
+            animation-name: fallSpook;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
-            opacity: 0.7;
+            opacity: 0.85;
+            will-change: transform;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
         }
 
-        @keyframes fallHeart {
+        @keyframes fallSpook {
             0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
+                transform: translateY(-5vh) rotate(0deg);
+                opacity: 0.95;
             }
 
             100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
+                transform: translateY(115vh) rotate(360deg);
+                opacity: 0.0;
             }
         }
 
-
+        /* ===== Tarjeta/hoja de la carta (tono crema) ===== */
         .note {
             position: relative;
             z-index: 10;
@@ -59,148 +81,243 @@
             max-width: 700px;
             padding: 60px 40px;
             box-sizing: border-box;
-            background: linear-gradient(#ffffff, #fdf8f6);
-            /* papel claro */
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            border: 1px solid #e5d5cc;
+            background: linear-gradient(#fff8e9, #f7efde);
+            /* crema cálido */
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+            border-radius: 10px;
+            border: 1px solid #e2c9a8;
             margin: 60px auto;
         }
 
         .letter-text {
-            color: #4b2e2e;
+            color: #3e2a23;
             font-size: 1.05rem;
-            line-height: 1.8;
+            line-height: 1.85;
             text-align: justify;
-            font-family: 'Georgia', serif;
+        }
+
+        .letter-text h1 {
+            color: #2b1c17;
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.6em;
         }
 
         .letter-text p {
-            margin-bottom: 1.6em;
+            margin-bottom: 1.4em;
         }
 
-        @media (max-width: 480px) {
+        /* ===== Video responsivo ===== */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 22px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        /* ===== Ajustes móviles ===== */
+        @media (max-width: 600px) {
             .note {
-                padding: 30px 20px;
+                padding: 32px 20px;
             }
 
             .letter-text {
                 font-size: 1rem;
             }
+
+            /* En móvil, la lluvia pasa por encima del texto */
+            #emoji-rain {
+                z-index: 9999;
+            }
+
+            .note {
+                z-index: 5;
+            }
         }
 
-        .note p {
+        /* ===== Título de la carta ===== */
+        .letter-text h1 {
+            font-family: 'UnifrakturCook', cursive;
+            font-size: 2.6rem;
+            color: #2b1c17;
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.6em;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* ===== Firma al final ===== */
+        .signature {
+            font-family: 'Spectral SC', serif;
             font-size: 1.2rem;
-            color: #4b2e2e;
-            line-height: 1.6;
-            word-wrap: break-word;
+            color: #3b2314;
+            text-align: right;
+            margin-top: 2em;
         }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            /* relación 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-top: 20px;
+        .btn {
+            appearance: none;
+            border: 1px solid #e2c9a8;
+            background: #fffaf0;
+            color: #3e2a23;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            border-radius: 8px;
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .puppy {
+            width: 20%;
+            border-radius: 50%;
+            box-shadow:
+                0 0 15px rgba(255, 140, 0, 0.3),
+                0 0 25px rgba(255, 69, 0, 0.25);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .puppy:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 0 25px rgba(255, 140, 0, 0.4),
+                0 0 35px rgba(255, 69, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
-
-    <div id="heart-rain"></div>
+    <!-- Lluvia spooktacular -->
+    <div id="emoji-rain"></div>
 
     <div class="note">
         <div class="letter-text">
-            <h1>6 de Septiembre del 2025</h1>
-            <p>Itzy, siempre es tan difícil comenzar a hacer una carta, primero quiero agradecerte por este segundo mes
-                a tu
-                lado, sinceramente creo que fue más largo esta vez o por lo menos así lo sentí yo, agradecerte por
-                siempre tener
-                la disposición de arreglar los problemas, de siempre quererme a mi y la todo lo bonito que tenemos, para
-                mi es
-                muy importante y valiente todo lo que hacer por nosotros todos los días, quiero también disculparme por
-                todas
-                las veces que he fallado, por las peleas que he comenzado, por las veces que te he hecho enojar, quiero
-                que
-                sepas que cada día estoy trabajando para ser una mejor persona para ti, no quiero que me veas igual,
-                quiero que
-                cada día de verdad notes que soy mejor porque me esfuerzo mucho.</p>
+            <h1>6 de Octubre del 2025</h1>
+            <p>
+                Buenas tardes/noches/días.
+            </p>
 
-            <p>Este mes de igual forma ha sido difícil para los dos, pero gracias a eso nos hemos conocido mucho más,
-                hemos
-                podido saber también como reaccionamos a diferentes situaciones por más difíciles que sean, me gusta el
-                nivel de
-                madurez con el que puedes llegar a pensar, me alegro de tener una mujer como tu para mi, como mi novia,
-                estoy
-                tan orgulloso de como eres y poder contarles a los demás sobre ti.</p>
+            <p>
+                Por medio de la presente epístola quiero hacerle compartir
+                el conocimiento sobre el agradecimiento y el fortunio que me hace usted percibir al tenerla en todos y
+                cada uno de los días de mi vida.
+            </p>
 
-            <p>Eres la más linda flor del jardín, eres el primer rayo de sol que me ilumina mi cara cada mañana, eres
-                esa
-                canción que pongo en loop cada día sin que me aburra, eres lo que siempre he querido, eres lo que
-                siempre he
-                soñado, gracias por poder hacerme imaginar un nuevo futuro, un futuro tan brillante y colorido, me
-                encanta poder
-                pensar en que alguna vez vamos a estar juntos viviendo en la misma casita, con Don Pascual, viendo
-                alguna
-                película, jugando juntos, cualquier cosa que sea, yo la disfruto mucho si es contigo.</p>
+            <p>
+                Jajajaja estoy tan feliz de tenerte junto a mi otro mes más mi amor, de verdad no sabes lo agradecido
+                que estoy, por ti me hago religioso la neta porque no se a quien agradecer por tu existencia, siento que
+                de verdad eres una mujer que no es de este mundo, nunca había conocido a nadie como tú, gracias por
+                todos los momentos que hemos pasado juntos, me haces tan feliz y gracias por todos los regalos que me
+                has hecho, no sabes lo feliz que soy, me haces un chico muy muuuuuuuuuy🐮 afortunado al estar junto a
+                mí.
+            </p>
 
-            <p>Estoy feliz de que seas tú, solo tú en mi corazón vas a estar siempre, te expresas tan lindo de mi
-                siempre,
-                paso los mejores momentos contigo y de verdad eso no lo cambiaría por nada en el mundo, yo quiero
-                casarme
-                contigo y tener ese futuro que siempre hemos deseado.</p>
+            <p>
+                El día de hoy me siento muy diferente a antes, tal vez es por como te he dicho antes, los aires de
+                octubre, hace mucho no sentía este clima y relacionarlo con calma y felicidad, de verdad que tú has
+                cambiado muchas cosas en mi vida y estoy muy agradecido con ello, te prometo que voy a seguir dándolo
+                todo siempre todos los días hasta que mi cuerpo aguante, soy feliz contigo y no necesito nada más.
+            </p>
 
-            <p>Perdona si esta carta no es tan larga como la anterior pero te prometo que la siguiente ya va a ser más
-                grande,
-                probablemente igual remodele mucho este apartado, lo trabaje más y todo eso, quiero hacerlo más bonito
-                así como
-                te lo mereces princesa, te amo Itzy</p>
+            <p>
+                Siempre vas a tener todo mi apoyo mi amor, nunca más vas a estar sola en la vida, vamos a estar siempre
+                juntos para todo, si alguna vez te sientes triste, enojada, abrumada, yo voy a estar ahí para sacarte
+                una sonrisa y olvides todos esos problemas que tienes en mente, después vamos a solucionarlos juntos,
+                vamos a superar todo eso que no te gusta juntos mi vida.
+            </p>
 
-            <p style="margin-top: 2em; text-align: right;"><strong>– J🐺💕</strong></p>
+            <p>
+                Conmigo siempre voy a hacer que te sientas muy amada, tanto como el primer día, te amaré siempre por el
+                resto de mis eternidades, sin límites, sin hacerte de menos, siempre validando todos tus sentimientos,
+                porque de verdad eres la mujer que quiero para toda mi vida, me encanta todo de ti, eres la mujer de mis
+                sueños, eres tan hermosa, tan romántica, tan cariñosa, tienes una forma de ser que me enamora solo de
+                estar pensando en ella ahorita mismo, me haces perderme en el amor, de verdad.
+            </p>
+
+            <p>
+                También espero que te hayan gustado tus regalos, la verdad no quería que fueras espectadora, pero no
+                sabía como darte tus flores amarillas y ser discreto contigo hasta que se me prendió el foco jajaja
+                aunque a mí si me hubiera gustado darte un ramo grande, ya será en un futuro, no me voy a quedar con las
+                ganas de eso la neta, me gustas mucho mi amor, gracias por un mes más y estoy ansioso por los que
+                vienen, te amo con todo mi corazón, mi ser, mis células, eres el motivo por el que sigo viviendo, me
+                haces tan feliz en esta vida, eres mi mayor tesoro, gracias cachorrita, te mando un gran abrazo, fuerte,
+                fuerte, no me despegaría de ti si pudiera, y muchos besos, te dejaría todos los cachetes babeados, de
+                tantos que te daría.</p>
+
+            <p>
+                Por último te dejo la cuarta parte de las canciones que te he estado dedicando,
+                espero te guste mi amor, gracias de verdad Itzy, te amo princesa❤️‍🔥.
+            </p>
+
+            <p class="signature"><strong>– J🐺🧡🖤</strong></p>
 
         </div>
 
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/0-XdTLKNu90?autoplay=1&loop=1&controls=1"
-                title="YouTube video player" frameborder="0"
+            <iframe src="https://www.youtube.com/embed/0-XdTLKNu90?autoplay=1&loop=1&playlist=0-XdTLKNu90&controls=1"
+                title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen loading="lazy">
             </iframe>
         </div>
 
-
-        <center><a href="6deAgosto.html"><img src="../img/bears.gif" alt="osos sisisi" width="20%"></a></center>
+        <center style="margin-top:18px">
+            <a class="btn" href="index.html">← Volver al menú</a>
+            <br><br>
+            <img class="puppy" src="https://media.tenor.com/1KTxTBEYM2AAAAAM/pup-puppy.gif" alt="Puppy feliz">
+        </center>
     </div>
+
+    <script>
+        // ===== Lluvia de Halloween =====
+        const SPOOK_EMOJIS = ["🎃", "🕸️", "🕷️", "🦇"];
+        const TOTAL_EMOJIS = 42;
+        const rain = document.getElementById("emoji-rain");
+
+        for (let i = 0; i < TOTAL_EMOJIS; i++) {
+            const node = document.createElement("div");
+            node.className = "spook";
+            node.textContent = SPOOK_EMOJIS[Math.floor(Math.random() * SPOOK_EMOJIS.length)];
+
+            // Posición horizontal aleatoria
+            node.style.left = `${Math.random() * 100}vw`;
+
+            // Tamaño aleatorio agradable
+            const size = Math.floor(Math.random() * 20) + 22; // 22–42 px aprox
+            node.style.fontSize = `${size}px`;
+
+            // Duración/retardo variables para efecto natural
+            const duration = 5 + Math.random() * 6; // 5–11s
+            const delay = Math.random() * 4;        // 0–4s
+            node.style.animationDuration = `${duration}s`;
+            node.style.animationDelay = `${delay}s`;
+
+            // Pequeño balanceo horizontal opcional (con CSS var + transform)
+            node.style.setProperty("--drift", `${Math.random() * 12 - 6}px`);
+
+            rain.appendChild(node);
+        }
+    </script>
 </body>
-
-<script>
-    const totalHearts = 35;
-    const heartContainer = document.getElementById("heart-rain");
-
-    for (let i = 0; i < totalHearts; i++) {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.textContent = "❤️";
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.animationDuration = `${5 + Math.random() * 5}s`;
-        heart.style.animationDelay = `${Math.random() * 5}s`;
-        heart.style.fontSize = `${Math.random() * 20 + 20}px`;
-        heartContainer.appendChild(heart);
-    }
-</script>
 
 </html>
