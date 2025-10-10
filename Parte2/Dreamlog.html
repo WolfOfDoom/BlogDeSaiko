@@ -492,20 +492,30 @@
             player = new YT.Player('bgm', {
                 events: {
                     onReady: () => {
-                        // Arranca de inmediato (muted por URL). Algunos navegadores necesitan este play explícito:
                         try { player.playVideo(); } catch (e) { }
                         player.mute();
                         player.setVolume(0);
                         isPlaying = true;
-                    }
 
+                        // 🔥 Desmuteo automático con fade-in
+                        setTimeout(() => {
+                            player.unMute();
+                            let vol = 0;
+                            const target = 20; // volumen inicial
+                            const fade = setInterval(() => {
+                                if (vol < target) {
+                                    vol++;
+                                    player.setVolume(vol);
+                                } else {
+                                    clearInterval(fade);
+                                }
+                            }, 150);
+                        }, 500);
+                    }
                 }
             });
         }
-        setTimeout(() => {
-            player.unMute();
-            player.setVolume(20); // volumen inicial
-        }, 500);
+
 
         // (Opcional) Conserva tu botón ♪ como pausa/reanudar
         (function () {
