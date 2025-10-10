@@ -487,7 +487,6 @@
     <script>
         let player;
         let isPlaying = false;
-        let armedUnmute = false; // activaremos desmute al primer gesto
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('bgm', {
@@ -498,11 +497,6 @@
                         player.mute();
                         player.setVolume(0);
                         isPlaying = true;
-                        // Preparamos el “primer gesto” para desmutear con fade-in
-                        armFirstGestureUnmute();
-                        // Si tienes el botón ♪, ponlo en estado playing
-                        const btn = document.getElementById('bgmToggle');
-                        if (btn) { btn.classList.add('playing'); btn.textContent = '❚❚'; }
                     }
 
                 }
