@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antiatazagorafobia — Dreamlog 001</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #e6ccd9;
+            font-family: 'Press Start 2P', monospace;
+            text-align: center;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 2s ease;
+            line-height: 1.7;
+            padding: 40px;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+
+        .lightbulb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #f2a8d5 0%, #a26c91 60%, transparent 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 200, 240, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 200, 240, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(255, 180, 220, 0.6);
+            }
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .endline {
+            color: #ffb3de;
+            text-shadow: 0 0 8px #ffb3de;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="ambient" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/31/audio_3b48c4c0aa.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="lightbulb" id="light"></div>
+
+    <div class="container" id="text">
+        <p class="fade">La casa estaba en silencio, respirando despacio, como si esperara algo.</p>
+        <p class="fade">Las paredes exhalaban soledad, y la oscuridad no era solo ausencia de luz… era una sustancia,
+            densa, pegajosa, que se colaba entre los dedos.</p>
+        <p class="fade">Afuera, risas. Niños. Voces que parecían moverse en círculos, girando alrededor de mi casa como
+            insectos atraídos por la única lámpara encendida del vecindario.</p>
+        <p class="fade">Adentro, nada. Ni siquiera mi sombra parecía seguirme.</p>
+        <p class="fade">El refrigerador emitió un zumbido débil antes de abrirse solo, como si una mano invisible
+            buscara algo que olvidé.</p>
+        <p class="fade">Dentro, solo había reflejos pálidos y el sonido hueco del aire escapando.</p>
+        <p class="fade">No quise mirar más. Fingí que no lo vi. Pero el miedo ya había encontrado mi nombre.</p>
+        <p class="fade">Fui a la puerta. La manija estaba helada, viva. Intenté abrir, pero una fuerza la sostenía con
+            rabia.</p>
+        <p class="fade">Los niños seguían riendo. No de alegría, sino de costumbre, como ecos grabados. Golpeé la
+            puerta. Nadie respondió.</p>
+        <p class="fade">El silencio me devolvió mi propio golpe.</p>
+        <p class="fade">Entonces lo sentí. Primero, un roce en la espalda. Luego, dedos invisibles, recorriendo mi piel
+            con una mezcla grotesca entre ternura y amenaza.</p>
+        <p class="fade">Eran cosquillas, pero no de risa. De miedo, crueles y familiares.</p>
+        <p class="fade">Mi cuerpo se contrajo, intenté aferrarme a la chapa, pero mis manos se deslizaban como si la
+            realidad misma no quisiera que escapara.</p>
+        <p class="fade">Me estaban jalando hacia mi cuarto. El pasillo se estiraba, respiraba. Cada paso que daba hacia
+            atrás se repetía, como si el suelo quisiera reescribirme.</p>
+        <p class="fade">Yo gritaba, pero el sonido salía en fragmentos.</p>
+        <p class="fade">Cuando crucé el umbral de mi habitación, vi mi cama. Y sobre ella, a mí. Durmiendo.</p>
+        <p class="fade">Grité. El sueño se rompió.</p>
+        <p class="fade">Desperté empapado en sudor, con el eco de mi voz todavía temblando en las paredes.</p>
+        <p class="fade endline">Y afuera, la luz seguía encendida, ella seguía a mi lado, todo estaba bien.</p>
+    </div>
+
+    <script>
+        const light = document.getElementById('light');
+        const textContainer = document.getElementById('text');
+        const ambient = document.getElementById('ambient');
+        const paragraphs = document.querySelectorAll('.fade');
+
+        light.addEventListener('click', async () => {
+            // ocultamos la bombilla
+            light.style.opacity = '0';
+            light.style.pointerEvents = 'none';
+
+            // reproducir audio con manejo de error
+            try {
+                await ambient.play();
+            } catch (err) {
+                console.warn('Autoplay bloqueado, se omitirá sonido.');
+            }
+
+            // mostrar texto con fade-in
+            textContainer.classList.add('visible');
+            paragraphs.forEach((p, i) => {
+                setTimeout(() => p.classList.add('show'), i * 2500);
+            });
+
+            // eliminar la bombilla cuando termine la transición
+            setTimeout(() => { light.style.display = 'none'; }, 800);
+        });
+    </script>
+
+
+</body>
+
+</html>

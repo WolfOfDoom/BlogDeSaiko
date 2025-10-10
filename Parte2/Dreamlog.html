@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dreamlog</title>
+    <meta name="description" content="Dreamlog — fragmentos de sueños y recuerdos difusos. by Saiko" />
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0b0f;
+            /* fondo base */
+            --ink: #d6d6d6;
+            /* texto principal */
+            --muted: #a8a8a8;
+            /* texto secundario */
+            --accent: #b3b3ff;
+            /* acento lila-azulado */
+            --glow: rgba(179, 179, 255, .65);
+            --card: #101018cc;
+            /* tarjeta translúcida */
+            --border: #2a2a38;
+        }
+
+        /* Reset mínimo */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            color: var(--ink);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Crimson Text', serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Ruido/estática muy sutil */
+        .grain::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .07;
+            mix-blend-mode: soft-light;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.35"/></svg>');
+            animation: drift 18s linear infinite;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate3d(0, 0, 0)
+            }
+
+            to {
+                transform: translate3d(-120px, -120px, 0)
+            }
+        }
+
+        /* Contenedor */
+        .wrap {
+            width: min(900px, 92vw);
+            padding: clamp(24px, 4vw, 40px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02), 0 20px 60px rgba(0, 0, 0, .35);
+            backdrop-filter: blur(2px) saturate(110%);
+            position: relative;
+        }
+
+        .title {
+            margin: 0 0 6px;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 255, 255, .18);
+            font-size: clamp(28px, 4.5vw, 44px);
+        }
+
+        .subtitle {
+            margin: 0 auto 28px;
+            text-align: center;
+            color: var(--muted);
+            font-style: italic;
+            max-width: 52ch;
+            line-height: 1.35;
+            font-size: clamp(14px, 1.8vw, 17px);
+        }
+
+        /* Barra superior con "estado de llamada" */
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 26px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            color: var(--muted);
+            opacity: .95;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80aa
+        }
+
+        .status small {
+            opacity: .85
+        }
+
+        /* Menú */
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 6px;
+            display: grid;
+            gap: 10px
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--card);
+            text-decoration: none;
+            color: var(--ink);
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+            will-change: transform;
+        }
+
+        .menu a .left {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            color: #9aa;
+            opacity: .9
+        }
+
+        .title-item {
+            font-weight: 600
+        }
+
+        .meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: #9aa
+        }
+
+        .menu a:hover {
+            transform: translateY(-2px);
+            border-color: #3a3a58;
+            box-shadow: 0 0 0 1px rgba(179, 179, 255, .25), 0 8px 30px rgba(64, 64, 128, .25);
+        }
+
+        .menu a:focus {
+            outline: 2px solid var(--glow);
+            outline-offset: 2px
+        }
+
+        /* Preview/epígrafe que cambia en hover */
+        .preview {
+            height: auto;
+            min-height: 28px;
+            margin: 12px 0 6px;
+            color: var(--muted);
+            font-style: italic;
+            text-align: center;
+            opacity: .9;
+            transition: opacity .2s ease;
+        }
+
+        /* Footer/meta */
+        footer {
+            margin-top: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12.5px
+        }
+
+        /* Accesibilidad: respeta reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            .menu a {
+                transition: none
+            }
+
+            .grain::before {
+                animation: none
+            }
+        }
+
+        /* Brillo tipo neón en elementos clave */
+        .title,
+        .title-item {
+            text-shadow:
+                0 0 8px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(211, 211, 211, 0.35),
+                0 0 35px rgba(53, 53, 53, 0.25);
+        }
+
+        /* Ícono de entrada con halo */
+        .menu a span:last-child {
+            text-shadow:
+                0 0 2px rgba(138, 138, 138, 0.8),
+                0 0 2px rgba(138, 138, 138, 0.8);
+        }
+
+        /* Al pasar el cursor, brilla más */
+        .menu a:hover .title-item {
+            text-shadow:
+                0 0 12px rgba(255, 255, 255, 0.8),
+                0 0 28px rgba(255, 255, 255, 0.6);
+        }
+
+        .status {
+            text-shadow:
+                0 0 12px rgba(255, 255, 255, 0.6),
+                0 0 28px rgba(255, 255, 255, 0.6);
+        }
+
+        /* === Ajustes estilo YUME NIKKI Final este si imprimir kasdkadak ese nombre ya existe === */
+
+        /* Fondo global igual, contenedor negro */
+        body {
+            background-color: #060406;
+            color: #e6ccd9;
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Contenedor principal ahora negro absoluto */
+        .wrap {
+            background-color: #000000;
+            /* Negro puro */
+            border: 2px solid #a26c91;
+            box-shadow:
+                0 0 20px rgba(255, 192, 230, 0.08),
+                inset 0 0 10px rgba(0, 0, 0, 0.8);
+            border-radius: 6px;
+            width: min(800px, 90%);
+            margin: 5vh auto;
+            padding: 40px 30px;
+        }
+
+        /* Menú igual (puedes conservar el estilo anterior) */
+        .menu a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #e6ccd9;
+            padding: 14px 18px;
+            border: 1px solid #a26c91;
+            border-radius: 3px;
+            background: #0a060a;
+            transition: 0.2s ease;
+        }
+
+        .menu a:hover {
+            background: #1d0c16;
+            color: #ffb3de;
+            text-shadow: 0 0 4px #ffb3de, 0 0 8px #ffb3de;
+            box-shadow: 0 0 10px rgba(255, 179, 222, 0.3);
+        }
+    </style>
+</head>
+
+<body class="grain">
+
+    <main class="wrap" role="main">
+        <h1 class="title">Dreamlog</h1>
+        <p class="subtitle">Фрагменты моего разума, оставившие электрический отголосок</p>
+
+        <div class="status" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <small>Call connected — 03:06 AM · connection stable</small>
+        </div>
+
+        <!-- Texto de preview dinámico -->
+        <p id="preview" class="preview">Pasa el cursor por una entrada para leer un fragmento…</p>
+
+        <ul class="menu" id="dreamMenu">
+            <!-- Ejemplo de entradas. Sustituye href por tus rutas reales -->
+            <li>
+                <a href="antiatazagorafobia.html"
+                    data-preview="Y afuera, la luz seguía encendida, ella seguía a mi lado, todo estaba bien."
+                    aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#001</span>
+                        <span class="title-item">Antiatazagorafobia</span>
+                    </div>
+                    <span class="meta">💡</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-preview="???" aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#002</span>
+                        <span class="title-item">???</span>
+                    </div>
+                    <span class="meta">❓</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-preview="???" aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#003</span>
+                        <span class="title-item">???</span>
+                    </div>
+                    <span class="meta">❓ </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-preview="???" aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#004</span>
+                        <span class="title-item">???</span>
+                    </div>
+                    <span class="meta">❓</span>
+                </a>
+            </li>
+        </ul>
+
+        <footer>
+            <span>© Saikore — 2025</span>
+            <br />
+            <span style="opacity:.75">Nada de esto es <kbd>REAL</kbd></span>
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            const menu = document.getElementById('dreamMenu');
+            const preview = document.getElementById('preview');
+            if (!menu || !preview) return;
+
+            function setPreview(txt) {
+                preview.style.opacity = 0.0;
+                window.requestAnimationFrame(() => {
+                    preview.textContent = txt;
+                    preview.style.opacity = 1.0;
+                });
+            }
+
+            menu.querySelectorAll('a').forEach(a => {
+                const text = a.getAttribute('data-preview');
+                a.addEventListener('mouseenter', () => setPreview(text || ''));
+                a.addEventListener('focus', () => setPreview(text || ''));
+                a.addEventListener('mouseleave', () => setPreview('Pasa el cursor por una entrada para leer un fragmento…'));
+                a.addEventListener('blur', () => setPreview('Pasa el cursor por una entrada para leer un fragmento…'));
+            });
+        })();
+
+
+    </script>
+</body>
+
+</html>
