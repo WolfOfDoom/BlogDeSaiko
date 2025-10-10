@@ -53,3 +53,9 @@ iframe {
     height: 880px;
     border: none;
 }
+
+.dreamlog {
+    text-shadow:
+        0 0 5px rgba(173, 2, 253, 0.801),
+        0 0 5px rgba(221, 53, 255, 0.781);
+}
