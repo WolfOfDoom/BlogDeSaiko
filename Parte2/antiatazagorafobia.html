@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antiatazagorafobia — Dreamlog 001</title>
+    <link rel="shortcut icon" href="../img/madotsuki no.gif" type="image/x-icon">
+    <title>Antiatazagorafobia</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
@@ -192,11 +193,10 @@
 
 <body>
 
-    <!-- (YouTube embed invisible) -->
     <iframe id="bgm" width="0" height="0"
-        src="https://www.youtube.com/embed/F1LU2By8XRQ?autoplay=1&loop=1&playlist=F1LU2By8XRQ&controls=0&mute=0"
-        title="Antiatazagorafobia BGM" frameborder="0" allow="autoplay; encrypted-media">
-    </iframe>
+        src="https://www.youtube.com/embed/F1LU2By8XRQ?enablejsapi=1&autoplay=0&loop=1&playlist=F1LU2By8XRQ&controls=0&mute=0"
+        title="Antiatazagorafobia BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+
 
     <div class="lightbulb" id="light"></div>
 
@@ -230,26 +230,50 @@
         <p class="fade endline">Y afuera, la luz seguía encendida, ella seguía a mi lado, todo estaba bien.</p>
     </div>
 
-
-
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bgm', {
+                events: {
+                    'onReady': () => console.log('BGM listo')
+                }
+            });
+        }
+
         const light = document.getElementById('light');
         const textContainer = document.getElementById('text');
         const paragraphs = document.querySelectorAll('.fade');
-        const bgm = document.getElementById('bgm'); // si usas YouTube
 
         light.addEventListener('click', () => {
+            // Oculta el foco
             light.style.opacity = '0';
             light.style.pointerEvents = 'none';
             setTimeout(() => light.style.display = 'none', 800);
 
-            // (re)cargar tu iframe de YouTube aquí si lo usas…
+            // --- Reproducir música con fade-in ---
+            if (player && player.playVideo) {
+                player.playVideo();
+                player.setVolume(0);
+                let vol = 0;
+                const fadeIn = setInterval(() => {
+                    if (vol < 20) { // Volumen final bajo (20%)
+                        vol += 1;
+                        player.setVolume(vol);
+                    } else {
+                        clearInterval(fadeIn);
+                    }
+                }, 150);
+            } else {
+                console.warn("YouTube player aún no está listo");
+            }
 
+            // --- Mostrar texto con efecto fade-in ---
             textContainer.classList.add('visible');
             paragraphs.forEach((p, i) => {
                 setTimeout(() => {
                     p.classList.add('show');
-                    // si es el último, lo aseguramos en pantalla
                     if (i === paragraphs.length - 1) {
                         setTimeout(() => p.scrollIntoView({ behavior: 'smooth', block: 'end' }), 300);
                     }
@@ -257,6 +281,8 @@
             });
         });
     </script>
+
+
 
 
     <a class="back-btn" href="Dreamlog.html" aria-label="Volver al Dreamlog">◀ MENÚ</a>

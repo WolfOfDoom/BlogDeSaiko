@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../img/mado.png" type="image/x-icon">
     <title>Dreamlog</title>
     <meta name="description" content="Dreamlog — fragmentos de sueños y recuerdos difusos. by Saiko" />
 
@@ -295,25 +296,128 @@
             text-shadow: 0 0 4px #ffb3de, 0 0 8px #ffb3de;
             box-shadow: 0 0 10px rgba(255, 179, 222, 0.3);
         }
+
+        /* Botón BGM flotante */
+        #bgmToggle {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 50;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #0a060a;
+            color: #ffb3de;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 179, 222, 0.25);
+            transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+        }
+
+        #bgmToggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 14px rgba(255, 179, 222, 0.35);
+        }
+
+        #bgmToggle.playing {
+            color: #b3b3ff;
+            box-shadow: 0 0 12px rgba(179, 179, 255, 0.35);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 50;
+            text-decoration: none;
+            color: #ffb3de;
+            background: #1a0f16;
+            border: 1px solid #a26c91;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            letter-spacing: .5px;
+            text-shadow: 0 0 6px rgba(255, 179, 222, .5);
+            box-shadow: 0 0 8px rgba(162, 108, 145, .35);
+            transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 12px rgba(255, 179, 222, .45);
+        }
+
+        /* Tooltip estilo Yume Nikki */
+        .tooltip {
+            position: fixed;
+            /* para seguir al cursor en toda la ventana */
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -120%);
+            /* centrado sobre el cursor */
+            background: #1a0f16;
+            color: #e6ccd9;
+            border: 1px solid #a26c91;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            line-height: 1.3;
+            box-shadow: 0 0 10px rgba(162, 108, 145, .35);
+            white-space: nowrap;
+            pointer-events: none;
+            /* no roba el hover */
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity .15s ease;
+        }
+
+        .tooltip::after {
+            /* flecha */
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #1a0f16;
+            filter: drop-shadow(0 -1px 0 #a26c91);
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tooltip {
+                transition: none;
+            }
+        }
     </style>
 </head>
 
 <body class="grain">
 
+    <a class="back-btn" href="#" aria-label="Volver atrás">◀ ATRÁS</a>
+
+
     <main class="wrap" role="main">
         <h1 class="title">Dreamlog</h1>
-        <p class="subtitle">Фрагменты моего разума, оставившие электрический отголосок</p>
+        <p class="subtitle" id="subtitle">Фрагменты моего разума, оставившие электрический отголосок</p>
 
         <div class="status" aria-live="polite">
             <span class="dot" aria-hidden="true"></span>
-            <small>Call connected — 03:06 AM · connection stable</small>
+            <small>Voice connected — 03:06 AM · connection stable</small>
         </div>
 
         <!-- Texto de preview dinámico -->
         <p id="preview" class="preview">Pasa el cursor por una entrada para leer un fragmento…</p>
 
         <ul class="menu" id="dreamMenu">
-            <!-- Ejemplo de entradas. Sustituye href por tus rutas reales -->
+            <!-- Ejemplo de entradas. Sustituye href por rutas -->
             <li>
                 <a href="antiatazagorafobia.html"
                     data-preview="Y afuera, la luz seguía encendida, ella seguía a mi lado, todo estaba bien."
@@ -361,6 +465,76 @@
         </footer>
     </main>
 
+    <div id="dreamTip" class="tooltip" role="tooltip" aria-hidden="true">
+        Fragmentos de mi mente que dejaron un eco eléctrico
+    </div>
+
+    <!-- BGM: YouTube -->
+    <iframe id="bgm" width="0" height="0"
+        src="https://www.youtube.com/embed/jh2-3lUOtJU?enablejsapi=1&autoplay=1&loop=1&playlist=jh2-3lUOtJU&controls=0&mute=1"
+        title="Dreamlog BGM" frameborder="0" allow="autoplay; encrypted-media">
+    </iframe>
+
+
+
+
+
+    <!-- Botón flotante para controlar música -->
+    <button id="bgmToggle" aria-label="Music toggle">♪</button>
+
+    <!-- API de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let isPlaying = false;
+        let armedUnmute = false; // activaremos desmute al primer gesto
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bgm', {
+                events: {
+                    onReady: () => {
+                        // Arranca de inmediato (muted por URL). Algunos navegadores necesitan este play explícito:
+                        try { player.playVideo(); } catch (e) { }
+                        player.mute();
+                        player.setVolume(0);
+                        isPlaying = true;
+                        // Preparamos el “primer gesto” para desmutear con fade-in
+                        armFirstGestureUnmute();
+                        // Si tienes el botón ♪, ponlo en estado playing
+                        const btn = document.getElementById('bgmToggle');
+                        if (btn) { btn.classList.add('playing'); btn.textContent = '❚❚'; }
+                    }
+
+                }
+            });
+        }
+        setTimeout(() => {
+            player.unMute();
+            player.setVolume(20); // volumen inicial
+        }, 500);
+
+        // (Opcional) Conserva tu botón ♪ como pausa/reanudar
+        (function () {
+            const btn = document.getElementById('bgmToggle');
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                if (!player) return;
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                    btn.classList.remove('playing');
+                    btn.textContent = '♪';
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                    btn.classList.add('playing');
+                    btn.textContent = '❚❚';
+                }
+            });
+        })();
+    </script>
+
+
     <script>
         (function () {
             const menu = document.getElementById('dreamMenu');
@@ -386,6 +560,56 @@
 
 
     </script>
+
+    <script>
+        (function () {
+            const sub = document.getElementById('subtitle');
+            const tip = document.getElementById('dreamTip');
+            if (!sub || !tip) return;
+
+            const MARGIN = 14; // separación del cursor
+            function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+
+            function positionTip(ev) {
+                const vw = window.innerWidth, vh = window.innerHeight;
+                let x = ev.clientX + MARGIN, y = ev.clientY - MARGIN; // arriba-derecha del cursor
+                // evitar que se salga por bordes
+                const rect = tip.getBoundingClientRect();
+                x = clamp(x, rect.width / 2 + 6, vw - rect.width / 2 - 6);
+                y = clamp(y, rect.height + 10, vh - 10);
+                tip.style.left = x + 'px';
+                tip.style.top = y + 'px';
+            }
+
+            function showTip() {
+                tip.classList.add('show');
+                tip.setAttribute('aria-hidden', 'false');
+            }
+            function hideTip() {
+                tip.classList.remove('show');
+                tip.setAttribute('aria-hidden', 'true');
+            }
+
+            // Mouse: seguir el cursor
+            sub.addEventListener('mouseenter', showTip);
+            sub.addEventListener('mousemove', positionTip);
+            sub.addEventListener('mouseleave', hideTip);
+
+            // Accesibilidad teclado: mostrar centrado bajo el subtítulo
+            sub.setAttribute('tabindex', '0');
+            sub.addEventListener('focus', () => {
+                const r = sub.getBoundingClientRect();
+                tip.style.left = (r.left + r.width / 2) + 'px';
+                tip.style.top = (r.bottom + 10) + 'px';
+                showTip();
+            });
+            sub.addEventListener('blur', hideTip);
+
+            // Recalcular en resize para que no quede fuera de vista
+            window.addEventListener('resize', hideTip);
+        })();
+    </script>
+
 </body>
 
 </html>
