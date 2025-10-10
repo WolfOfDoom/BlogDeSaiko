@@ -74,14 +74,129 @@
         audio {
             display: none;
         }
+
+        /* La bombilla siempre por encima */
+        .lightbulb {
+            z-index: 10;
+        }
+
+        /* El texto NO recibe clics hasta que sea visible */
+        .container {
+            position: relative;
+            pointer-events: none;
+            /* <- bloquea interacciones cuando está oculta */
+        }
+
+        /* Cuando se vuelve visible, ya acepta interacciones y scroll */
+        .container.visible {
+            pointer-events: auto;
+            overflow-y: auto;
+            max-height: 100vh;
+            /* por si el texto es largo */
+        }
+
+        /* --- FIX: contenedor scrolleable y con colchón inferior --- */
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            /* bloquea el scroll del body */
+        }
+
+        .container {
+            position: relative;
+            /* alto flexible según el viewport (fallback + unidades modernas) */
+            max-height: 100vh;
+            max-height: 100svh;
+            /* iOS/Android modernos */
+            max-height: 100dvh;
+            /* navegadores recientes */
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scroll-padding-bottom: 120px;
+            /* para que el último párrafo no quede pegado */
+            padding-bottom: 100px;
+            /* colchón real de espacio */
+        }
+
+        /* cuando se vuelve visible ya recibe eventos (si no lo tenías) */
+        .container.visible {
+            pointer-events: auto;
+        }
+
+        /* por si quieres forzar que el último párrafo siempre tenga extra espacio */
+        .container p:last-child {
+            margin-bottom: 40px;
+        }
+
+        /* Firefox */
+        .container {
+            scrollbar-width: thin;
+            scrollbar-color: #a26c91 #0a060a;
+            /* thumb / track */
+        }
+
+        /* WebKit (Chrome, Edge, Safari) */
+        .container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: #0a060a;
+            /* track oscuro */
+            border-left: 1px solid #1a0f16;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: #a26c91;
+            /* magenta apagado */
+            border: 2px solid #0a060a;
+            /* halo oscuro para “pixel art vibe” */
+            border-radius: 8px;
+            box-shadow: inset 0 0 6px rgba(255, 180, 220, 0.25);
+        }
+
+        .container::-webkit-scrollbar-thumb:hover {
+            background: #c98ab1;
+            /* hover */
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 20;
+            text-decoration: none;
+            color: #ffb3de;
+            background: #1a0f16;
+            border: 1px solid #a26c91;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            letter-spacing: .5px;
+            text-shadow: 0 0 6px rgba(255, 179, 222, .5);
+            box-shadow: 0 0 8px rgba(162, 108, 145, .35);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 12px rgba(255, 179, 222, .45);
+        }
     </style>
 </head>
 
 <body>
 
-    <audio id="ambient" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/10/31/audio_3b48c4c0aa.mp3" type="audio/mpeg">
-    </audio>
+    <!-- (YouTube embed invisible) -->
+    <iframe id="bgm" width="0" height="0"
+        src="https://www.youtube.com/embed/F1LU2By8XRQ?autoplay=1&loop=1&playlist=F1LU2By8XRQ&controls=0&mute=0"
+        title="Antiatazagorafobia BGM" frameborder="0" allow="autoplay; encrypted-media">
+    </iframe>
 
     <div class="lightbulb" id="light"></div>
 
@@ -115,34 +230,37 @@
         <p class="fade endline">Y afuera, la luz seguía encendida, ella seguía a mi lado, todo estaba bien.</p>
     </div>
 
+
+
     <script>
         const light = document.getElementById('light');
         const textContainer = document.getElementById('text');
-        const ambient = document.getElementById('ambient');
         const paragraphs = document.querySelectorAll('.fade');
+        const bgm = document.getElementById('bgm'); // si usas YouTube
 
-        light.addEventListener('click', async () => {
-            // ocultamos la bombilla
+        light.addEventListener('click', () => {
             light.style.opacity = '0';
             light.style.pointerEvents = 'none';
+            setTimeout(() => light.style.display = 'none', 800);
 
-            // reproducir audio con manejo de error
-            try {
-                await ambient.play();
-            } catch (err) {
-                console.warn('Autoplay bloqueado, se omitirá sonido.');
-            }
+            // (re)cargar tu iframe de YouTube aquí si lo usas…
 
-            // mostrar texto con fade-in
             textContainer.classList.add('visible');
             paragraphs.forEach((p, i) => {
-                setTimeout(() => p.classList.add('show'), i * 2500);
+                setTimeout(() => {
+                    p.classList.add('show');
+                    // si es el último, lo aseguramos en pantalla
+                    if (i === paragraphs.length - 1) {
+                        setTimeout(() => p.scrollIntoView({ behavior: 'smooth', block: 'end' }), 300);
+                    }
+                }, i * 2500);
             });
-
-            // eliminar la bombilla cuando termine la transición
-            setTimeout(() => { light.style.display = 'none'; }, 800);
         });
     </script>
+
+
+    <a class="back-btn" href="Dreamlog.html" aria-label="Volver al Dreamlog">◀ MENÚ</a>
+
 
 
 </body>
