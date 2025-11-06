@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/eyei.png" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Spectral+SC&family=Sevillana&display=swap"
+        rel="stylesheet">
+    <title>💜Para Itzy🖤</title>
+
+    <style>
+        :root {
+            /* Paleta Día de Muertos */
+            --cempasuchil: #f4b000;
+            --vino: #6b1b1b;
+            --morado: #5a2a82;
+            --noche1: #0b0615;
+            --noche2: #120a24;
+            --papel: #fedfb1;
+            /* crema cálido */
+            --papel-borde: #e2c9a8;
+            --tinta: #3e2a23;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* Capa base oscura con gradiente "noche" */
+            background:
+                radial-gradient(1500px 800px at 10% -10%, rgba(255, 140, 0, 0.10), transparent 60%),
+                radial-gradient(1200px 700px at 110% 0%, rgba(255, 69, 0, 0.08), transparent 55%),
+                linear-gradient(180deg, #0b0615 0%, #120a24 55%, #0b0615 100%);
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: #eadfd6;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-conic-gradient(from 45deg, rgba(255, 255, 255, 0.03) 0 10deg, transparent 10deg 20deg);
+            mix-blend-mode: overlay;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        /* ===== Lluvia de emojis ===== */
+        #emoji-rain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            /* Por defecto detrás de la nota */
+            overflow: hidden;
+        }
+
+        .spook {
+            position: absolute;
+            top: -2.5em;
+            animation-name: fallSpook;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            opacity: 0.85;
+            will-change: transform;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+        }
+
+        @keyframes fallSpook {
+            0% {
+                transform: translateY(-5vh) rotate(0deg);
+                opacity: 0.95;
+            }
+
+            100% {
+                transform: translateY(115vh) rotate(360deg);
+                opacity: 0.0;
+            }
+        }
+
+        /* ===== Tarjeta/hoja de la carta (tono crema) ===== */
+        .note {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 700px;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            background: linear-gradient(#fff8e9, #f7efde);
+            /* crema cálido */
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+            border-radius: 10px;
+            border: 1px solid #e2c9a8;
+            margin: 60px auto;
+        }
+
+        .letter-text {
+            color: #3e2a23;
+            font-size: 1.05rem;
+            line-height: 1.85;
+            text-align: justify;
+        }
+
+        .letter-text h1 {
+            color: #2b1c17;
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.6em;
+        }
+
+        .letter-text p {
+            margin-bottom: 1.4em;
+        }
+
+        /* ===== Video responsivo ===== */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 22px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        /* ===== Ajustes móviles ===== */
+        @media (max-width: 600px) {
+            .note {
+                padding: 32px 20px;
+            }
+
+            .letter-text {
+                font-size: 1rem;
+            }
+
+            /* En móvil, la lluvia pasa por encima del texto */
+            #emoji-rain {
+                z-index: 9999;
+            }
+
+            .note {
+                z-index: 5;
+            }
+        }
+
+        /* ===== Título de la carta ===== */
+        .letter-text h1 {
+            font-family: 'Sevillana', cursive;
+            font-size: 2.6rem;
+            color: #2b1c17;
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.6em;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* ===== Firma al final ===== */
+        .signature {
+            font-family: 'Spectral SC', serif;
+            font-size: 1.2rem;
+            color: #3b2314;
+            text-align: right;
+            margin-top: 2em;
+        }
+
+        .btn {
+            appearance: none;
+            border: 1px solid #e2c9a8;
+            background: #fffaf0;
+            color: #3e2a23;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .puppy {
+            width: 20%;
+            border-radius: 50%;
+            box-shadow:
+                0 0 15px rgba(255, 140, 0, 0.3),
+                0 0 25px rgba(255, 69, 0, 0.25);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .puppy:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 0 25px rgba(255, 140, 0, 0.4),
+                0 0 35px rgba(255, 69, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Lluvia spooktacular -->
+    <div id="emoji-rain"></div>
+
+    <div class="note">
+        <div class="letter-text">
+            <h1>6 de Noviembre del 2025</h1>
+            <p>
+                Hola mi amor, mi princesa, mi tesoro, mi vida, mi cielo, mi niña, mi cachorrita, mi vaquita, mi todo.❤️
+            </p>
+
+            <p>
+                Quiero darte las gracias por estos 4 meses juntos, por todos estos momentos que tenemos, por estos 123
+                días que hemos estado juntos, primero quiero agradecerte por cambiar mi vida, sabes antes la vida me
+                sabía insípida, a veces no me sentía parte de nada, no sentía que tuviera un lugar seguro pero desde que
+                estás aquí siento que tengo algún lugar a donde llegar, siento que por fin alguien me espera, tengo a
+                donde ir, tengo con quien pasar el tiempo, tengo a alguien con quien puedo compartir mis gustos, mis
+                emociones, por fin tengo a alguien a quien puedo contarle cuando me emociona algo, cuando veo algo
+                interesante o simplemente alguien para hacer el tonto, para expresar mi cariño, para darle mi amor, que
+                a pesar de que no sabía a donde iba o si por lo menos quería vivirla llegaste y salvaste mi vida.
+            </p>
+
+            <p>
+                De verdad que disfruto cada día que estas junto a mi, me la paso esperando a que llegue el fin de semana
+                para estar todo el día juntos o entre semana a que vuelvas de trabajar, así sea solo para escucharte 5
+                minutitos como esta semana que no hemos estado tanto tiempo juntos, yo te voy a esperar y voy a
+                disfrutar nuestro tiempo como no imaginas, gracias Itzy.
+            </p>
+
+            <p>
+                Quiero darte un gran abrazo, besarte, decirte toda una eternidad cuanto te amo, juntos, acostados,
+                disfrutándonos el uno al otro, no tengo idea de cuantas veces me han entrado ganas de llorar escribiendo
+                esto, se vienen a mi mente pensamientos de mi pasando estas fechas contigo y me ponen muy feliz,
+                sentirme de nuevo en familia, sentirme querido, no sentir miedo de expresarme o de ser ignorado, no
+                tener miedo de poder contarte mis sueños y que los minimices o por lo menos lo poco que quedan de ellos,
+                sigo haciendo nuevos cómo vivir nuestro lindo noviazgo en paz, amo pensar eso siempre, se siente tan
+                cálido ser tu novio, como el solecito tempranero cuando acaricia la cara, como la lluvia fría de verano
+                que se siente tan refrescante por el calor, te amo.
+            </p>
+
+            <p>
+                A veces es un poco complicado escribir sin terminar llorando, me pongo a recordar muchas cosas de cuando
+                era chico, a veces son cosas que ni recordaba, pero están ahí, eso me hace pensar que tal vez el que
+                escribe las cartas es el pequeño, el que tal vez siempre quiso un amiguito de la infancia y ver como
+                crecían ambos, el que siempre busco una amistad sincera y nunca perdió esperanza en eso a pesar de que a
+                veces no la pasaba tan bien, pero ese pequeño es el que esta completamente seguro que te ama y quiere
+                construir lindos recuerdos contigo porque a pesar de que solo estaba ahí, solo o incluso escondido, lo
+                reanimaste, lo volviste a llenar de vida, de color, perdón si esta carta parece de todo menos de
+                felicitación, estos días he pensado mucho cosas así, pero a final de cuentas quiero que veas todo lo que
+                has hecho por mi, todo lo que me has ayudado en mi vida, gracias Itzy, muchísimas gracias.❤️‍🩹
+            </p>
+
+            <p>
+                Para terminar te dejo la quinta parte de las canciones que te he estado dedicando, espero sea de tu
+                agrado preciosa, TEAMOOOOOOOOOOOOOOOOOO.❤️‍🔥
+            </p>
+
+            <p class="signature"><strong>– J🐺💜🖤</strong></p>
+
+        </div>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/I55gMMSatgw?autoplay=1&loop=1&playlist=0-XdTLKNu90&controls=1"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy">
+            </iframe>
+        </div>
+
+        <center style="margin-top:18px">
+            <a class="btn" href="index.html">← Volver al menú</a>
+            <br><br>
+            <img class="puppy" src="https://fridafiestas.com/wp-content/uploads/2025/09/CEMPASUCHIL-1.png" alt="Cempa">
+        </center>
+    </div>
+
+    <script>
+        // ===== Lluvia de Halloween =====
+        const SPOOK_EMOJIS = ["💀", "🕯️", "💜", "🧡"];
+        const TOTAL_EMOJIS = 42;
+        const rain = document.getElementById("emoji-rain");
+
+        for (let i = 0; i < TOTAL_EMOJIS; i++) {
+            const node = document.createElement("div");
+            node.className = "spook";
+            node.textContent = SPOOK_EMOJIS[Math.floor(Math.random() * SPOOK_EMOJIS.length)];
+
+            // Posición horizontal aleatoria
+            node.style.left = `${Math.random() * 100}vw`;
+
+            // Tamaño aleatorio agradable
+            const size = Math.floor(Math.random() * 20) + 22; // 22–42 px aprox
+            node.style.fontSize = `${size}px`;
+
+            // Duración/retardo variables para efecto natural
+            const duration = 5 + Math.random() * 6; // 5–11s
+            const delay = Math.random() * 4;        // 0–4s
+            node.style.animationDuration = `${duration}s`;
+            node.style.animationDelay = `${delay}s`;
+
+            // Pequeño balanceo horizontal opcional (con CSS var + transform)
+            node.style.setProperty("--drift", `${Math.random() * 12 - 6}px`);
+
+            rain.appendChild(node);
+        }
+    </script>
+</body>
+
+</html>
