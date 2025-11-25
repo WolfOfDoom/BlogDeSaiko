@@ -395,6 +395,53 @@
                 padding-bottom: 5rem;
             }
         }
+
+        /* === Botón flotante BGM === */
+        #bgmToggle {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            z-index: 40;
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 90, 90, 0.8);
+            background: radial-gradient(circle at 30% 0%, rgba(255, 180, 180, 0.16), rgba(15, 5, 8, 0.96));
+            color: #ffd6d6;
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow:
+                0 0 12px rgba(244, 67, 54, 0.35),
+                0 0 24px rgba(10, 0, 0, 0.9);
+            text-shadow: 0 0 6px rgba(255, 200, 200, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                background 0.15s ease,
+                color 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        #bgmToggle:hover {
+            transform: translateY(-1px);
+            background: radial-gradient(circle at 10% 0%, rgba(255, 120, 120, 0.3), rgba(20, 5, 8, 1));
+            box-shadow:
+                0 0 16px rgba(244, 67, 54, 0.5),
+                0 0 30px rgba(0, 0, 0, 1);
+        }
+
+        #bgmToggle.playing {
+            color: #ffbfae;
+            border-color: rgba(255, 200, 180, 0.9);
+            box-shadow:
+                0 0 16px rgba(255, 200, 180, 0.55),
+                0 0 34px rgba(0, 0, 0, 1);
+        }
     </style>
 </head>
 
@@ -409,100 +456,139 @@
             <p class="subtitle">Un error transformado en sueño</p>
         </header>
 
+        <!-- Audio ambiente: -->
+        <iframe id="bgm" width="0" height="0"
+            src="https://www.youtube.com/embed/8fDkkD2pGuI?enablejsapi=1&autoplay=0&loop=1&playlist=8fDkkD2pGuI&controls=0&mute=0"
+            title="Prosopodismorfia BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        <!-- Botón flotante para controlar la música -->
+        <button id="bgmToggle" aria-label="Alternar música de fondo">♪</button>
+
         <main>
-            <section class="poem-wrapper" aria-label="Prosopodismorfia">
-                <h2 class="poem-title">¿?</h2>
+            <main>
+                <section class="poem-wrapper" aria-label="Prosopodismorfia">
+                    <h2 class="poem-title">¿?</h2>
 
-                <div class="poem-body">
-                    <p>
-                        La casa respiraba raro,<br>
-                        como si cada muro recordara un nombre que no era mío.
-                    </p>
+                    <div class="poem-body">
+                        <p>
+                            La casa respiraba raro,<br>
+                            como si cada muro recordara un nombre que no era mío.
+                        </p>
 
-                    <p class="horror-stanza shiver"><br>
-                        Éramos varios, temblando entre sombras,<br>
-                        peleando contra un <span class="focus-word">demonio</span> que hablaba con todas nuestras
-                        voces.<br>
-                        Lo degollé tarde; demasiado tarde.
-                    </p>
+                        <p class="horror-stanza shiver"><br>
+                            Éramos varios, temblando entre sombras,<br>
+                            peleando contra un <span class="focus-word">demonio</span> que hablaba con todas nuestras
+                            voces.<br>
+                            Lo degollé tarde; demasiado tarde.
+                        </p>
 
-                    <p class="horror-stanza shiver"><br>
-                        Algo detrás de él despertó,<br>
-                        una <span class="focus-word">abominación</span> sin dueño,<br>
-                        cambiando de <span class="focus-word">forma</span> como si mis recuerdos fueran máscaras.<br>
-                        Tomó los rostros de mi familia,<br>
-                        sonrió con bocas que yo conocía.
-                    </p>
+                        <p class="horror-stanza shiver"><br>
+                            Algo detrás de él despertó,<br>
+                            una <span class="focus-word">abominación</span> sin dueño,<br>
+                            cambiando de <span class="focus-word">forma</span> como si mis recuerdos fueran
+                            máscaras.<br>
+                            Tomó los rostros de mi familia,<br>
+                            sonrió con bocas que yo conocía.
+                        </p>
 
-                    <p class="horror-stanza shiver"><br>
-                        Corrí.<br>
-                        Primero por la puerta,<br>
-                        luego por los techos,<br>
-                        casi volando sobre calles que se estiraban como pesadillas.<br>
-                        Nadie me entendía; todos eran reflejos dudosos.<br>
-                        Temí que la criatura estuviera escondida entre ellos.
-                    </p>
+                        <p class="horror-stanza shiver"><br>
+                            Corrí.<br>
+                            Primero por la puerta,<br>
+                            luego por los techos,<br>
+                            casi volando sobre calles que se estiraban como pesadillas.<br>
+                            Nadie me entendía; todos eran reflejos dudosos.<br>
+                            Temí que la criatura estuviera escondida entre ellos.
+                        </p>
 
-                    <p class="horror-stanza shiver"><br>
-                        Una mano me detuvo.<br>
-                        Un amigo.<br>
-                        Un rostro que no cambiaba.<br>
-                        Pero incluso él se deshizo cuando pedí ayuda.<br>
-                        Seguí <span class="focus-word">corriendo</span>,<br>
-                        con el corazón rompiendo el aire,<br>
-                        huyendo de algo que ya no sabía si era real<br>
-                        o si estaba hecho con mis propios miedos.
-                    </p>
+                        <p class="horror-stanza shiver"><br>
+                            Una mano me detuvo.<br>
+                            Un amigo.<br>
+                            Un rostro que no cambiaba.<br>
+                            Pero incluso él se deshizo cuando pedí ayuda.<br>
+                            Seguí <span class="focus-word">corriendo</span>,<br>
+                            con el corazón rompiendo el aire,<br>
+                            huyendo de algo que ya no sabía si era real<br>
+                            o si estaba hecho con mis propios miedos.
+                        </p>
 
-                    <p class="ending"><br>
-                        Desperté agitado, roto, confundido…<br>
-                        y aun así, todo estaba bien,<br>
-                        porque <strong>ella</strong> estaba a mi lado,<br>
-                        sentada en el borde del sueño<br>
-                        como si siempre hubiese sido la salida.
-                    </p>
-                </div>
+                        <p class="ending"><br>
+                            Desperté agitado, roto, confundido…<br>
+                            y aun así, todo estaba bien,<br>
+                            porque <strong>ella</strong> estaba a mi lado,<br>
+                            sentada en el borde del sueño<br>
+                            como si siempre hubiese sido la salida.
+                        </p>
+                    </div>
 
-                <div class="back-wrapper">
-                    <!-- Cambia href a la ruta real de tu página principal -->
-                    <a href="Dreamlog.html" class="back-button">
-                        <span>Volver a la página principal</span>
-                    </a>
-                </div>
-            </section>
+                    <div class="back-wrapper">
+                        <!-- Cambia href a la ruta real de tu página principal -->
+                        <a href="Dreamlog.html" class="back-button">
+                            <span>Volver a la página principal</span>
+                        </a>
+                    </div>
+                </section>
 
-            <footer>
-                <span>BUAxCgAABPyKn1h944rBgJLJ6y/Dy8VWNnyU</span>
-            </footer>
-        </main>
+                <footer>
+                    <span>BUAxCgAABPyKn1h944rBgJLJ6y/Dy8VWNnyU</span>
+                </footer>
+            </main>
     </div>
 
-    <!-- Audio ambiente: -->
-    <iframe id="bgm" width="0" height="0"
-        src="https://www.youtube.com/embed/8fDkkD2pGuI?enablejsapi=1&autoplay=0&loop=1&playlist=8fDkkD2pGuI&controls=0&mute=0"
-        title="Antiatazagorafobia BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-
+    <!-- API de YouTube para controlar el iframe bgm -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // ====== Audio ambiente (autoplay suave si el navegador lo permite) ======
+        let player;
+        let isPlaying = false;
+
+        // Llamado automáticamente por la API de YouTube
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bgm', {
+                events: {
+                    onReady: () => {
+                        try { player.playVideo(); } catch (e) { }
+
+                        // Empezamos en silencio y hacemos fade-in de volumen
+                        player.mute();
+                        player.setVolume(0);
+                        isPlaying = true;
+
+                        setTimeout(() => {
+                            player.unMute();
+                            let vol = 0;
+                            const target = 22; // volumen inicial suave
+                            const fade = setInterval(() => {
+                                if (vol < target) {
+                                    vol++;
+                                    player.setVolume(vol);
+                                } else {
+                                    clearInterval(fade);
+                                }
+                            }, 150);
+                        }, 600);
+                    }
+                }
+            });
+        }
+
+        // Botón ♪ para pausar / reanudar
         (function () {
-            const audio = document.getElementById("ambient-audio");
-            if (!audio) return;
+            const btn = document.getElementById('bgmToggle');
+            if (!btn) return;
 
-            const tryPlay = () => {
-                audio.volume = 0.25;
-                audio.play().catch(() => {
-                    // Si el navegador bloquea autoplay, se activará cuando el usuario haga click
-                    document.addEventListener("click", () => {
-                        audio.play().catch(() => { });
-                    }, { once: true });
-                });
-            };
+            btn.addEventListener('click', () => {
+                if (!player) return;
 
-            if (document.readyState === "complete") {
-                tryPlay();
-            } else {
-                window.addEventListener("load", tryPlay);
-            }
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                    btn.classList.remove('playing');
+                    btn.textContent = '♪';
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                    btn.classList.add('playing');
+                    btn.textContent = '❚❚';
+                }
+            });
         })();
 
         // ====== Ojos weirdcore que siguen el cursor ======
