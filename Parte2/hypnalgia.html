@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../img/madotsuki no.gif" type="image/x-icon">
+    <title>HYPNALGIA</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f3e4;
+            /* base amarillenta */
+            --ink: #2a2a2a;
+            /* color de texto inicial */
+            --muted: #6b6b6b;
+            --accent: #3a93ff;
+            --shadow: rgba(0, 0, 0, .08);
+
+            /* Cielo */
+            --sky-top: #ffffff;
+            --sky-base: var(--bg);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        /* Usa variables para el color de texto */
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            overflow-x: hidden;
+            transition: background 1.8s ease, color 1.4s ease;
+            /* transiciones suaves */
+        }
+
+        /* Cielo/nubes: no interceptan clicks */
+        .sky {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(120% 80% at 50% 0%, var(--sky-top) 0%, var(--sky-base) 60%, var(--sky-base) 100%);
+            pointer-events: none;
+            /* Clave: oscurecemos con filter (sí anima) */
+            filter: brightness(1) saturate(1);
+            transition: filter 2.2s ease;
+        }
+
+        .clouds {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: .9;
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='220' viewBox='0 0 600 220'%3E%3Cdefs%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23ffffff' filter='url(%23b)' opacity='.8'%3E%3Cellipse cx='120' cy='120' rx='120' ry='60'/%3E%3Cellipse cx='240' cy='110' rx='140' ry='70'/%3E%3Cellipse cx='360' cy='125' rx='120' ry='55'/%3E%3Cellipse cx='460' cy='115' rx='100' ry='50'/%3E%3C/g%3E%3C/svg%3E") repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='240' viewBox='0 0 800 240'%3E%3Cg fill='%23ffffff' opacity='.7'%3E%3Cellipse cx='160' cy='120' rx='150' ry='60'/%3E%3Cellipse cx='340' cy='110' rx='170' ry='70'/%3E%3Cellipse cx='560' cy='130' rx='140' ry='60'/%3E%3C/g%3E%3C/svg%3E") repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='200' viewBox='0 0 500 200'%3E%3Cg fill='%23fff' opacity='.55'%3E%3Cellipse cx='120' cy='100' rx='120' ry='50'/%3E%3Cellipse cx='260' cy='95' rx='140' ry='55'/%3E%3Cellipse cx='420' cy='110' rx='110' ry='45'/%3E%3C/g%3E%3C/svg%3E") repeat-x;
+            background-size: 800px 220px, 1000px 240px, 600px 200px;
+            background-position: 0 10%, 0 35%, 0 60%;
+            animation: drift1 80s linear infinite, drift2 120s linear infinite, drift3 160s linear infinite;
+            animation-delay: 0s, -10s, -20s;
+            transition: opacity 2s ease;
+        }
+
+
+        @keyframes drift1 {
+            from {
+                background-position: 0 10%, 0 35%, 0 60%
+            }
+
+            to {
+                background-position: 800px 10%, 0 35%, 0 60%
+            }
+        }
+
+        @keyframes drift2 {
+            from {
+                background-position: 0 10%, 0 35%, 0 60%
+            }
+
+            to {
+                background-position: 0 10%, 1000px 35%, 0 60%
+            }
+        }
+
+        @keyframes drift3 {
+            from {
+                background-position: 0 10%, 0 35%, 0 60%
+            }
+
+            to {
+                background-position: 0 10%, 0 35%, 600px 60%
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .gate {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, .6), rgba(255, 255, 255, .2));
+            backdrop-filter: blur(2px);
+            z-index: 10;
+        }
+
+        .gate-inner {
+            text-align: center;
+            padding: 32px 22px;
+            border: 1px solid rgba(0, 0, 0, .08);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .45);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+            letter-spacing: .14em;
+            font-weight: 600;
+            font-size: 20px
+        }
+
+        .tag {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .btn {
+            margin-top: 18px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, .2);
+            background: #fff;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .btn:hover {
+            box-shadow: 0 6px 18px var(--shadow)
+        }
+
+        .story {
+            position: relative;
+            max-width: 860px;
+            margin: 16vh auto 20vh;
+            padding: 0 22px
+        }
+
+        .para {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 1200ms ease, transform 1200ms ease;
+            margin: 22px 0;
+            line-height: 1.7
+        }
+
+        .para.show {
+            opacity: 1;
+            transform: none
+        }
+
+        .em {
+            color: #000;
+            font-weight: 600
+        }
+
+        .lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1
+        }
+
+        .lines svg {
+            position: absolute;
+            width: min(90vw, 900px);
+            height: 70vh;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 18vh
+        }
+
+        .stroke {
+            stroke: #1b1b1b;
+            stroke-width: 1.2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: .4;
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .6))
+        }
+
+        .stroke.draw {
+            animation: draw 6s ease forwards
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0
+            }
+        }
+
+        .toolbar {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            display: flex;
+            gap: 8px
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, .6);
+            border: 1px solid rgba(0, 0, 0, .15);
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(4px)
+        }
+
+        .chip:focus,
+        .chip:hover {
+            box-shadow: 0 6px 18px var(--shadow)
+        }
+
+        /* transición final: cielo oscuro + texto blanco */
+        body.dark-end {
+            background: linear-gradient(to bottom, #0d0d0f, #1a1a22 60%, #000 100%) !important;
+            color: #f0f0f0 !important;
+            transition: background 3s ease, color 2s ease;
+        }
+
+        body.dark-end .clouds {
+            opacity: 0;
+            transition: opacity 2.5s ease;
+        }
+
+        body.dark-end .para {
+            color: #f0f0f0 !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+        }
+
+        body.dark-end h1,
+        body.dark-end .tag {
+            color: #fff !important;
+        }
+
+        /* transición final: cielo oscuro + texto blanco */
+        body.dark-end {
+            background: linear-gradient(to bottom, #0d0d0f, #1a1a22 60%, #000 100%) !important;
+            color: #f0f0f0 !important;
+            transition: background 3s ease, color 2s ease;
+        }
+
+        body.dark-end .clouds {
+            opacity: 0;
+            transition: opacity 2.5s ease;
+        }
+
+        body.dark-end .para {
+            color: #f0f0f0 !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+        }
+
+        body.dark-end h1,
+        body.dark-end .tag {
+            color: #fff !important;
+        }
+
+        /* Modo final (oscuro): SOLO cambiamos variables y filtros */
+        .dark-end {
+            --bg: #0e0e12;
+            --ink: #f0f0f0;
+            --sky-top: #0a0a0d;
+            --sky-base: #0e0e12;
+        }
+
+        .dark-end .sky {
+            filter: brightness(0.25) saturate(1.1);
+        }
+
+        .dark-end .clouds {
+            opacity: 0;
+        }
+
+        /* Los párrafos heredan el color variable */
+        .para {
+            color: inherit;
+        }
+
+        /* Evitar que .em se quede negra al final */
+        .dark-end .em {
+            color: #ffffff;
+        }
+
+        /* Glow sutil a la última línea */
+        .dark-end .para:last-child {
+            text-shadow: 0 0 10px rgba(255, 255, 255, .35), 0 0 24px rgba(200, 220, 255, .15);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sky"></div>
+    <div class="clouds" aria-hidden="true"></div>
+
+    <div class="gate" id="gate">
+        <div class="gate-inner">
+            <h1>HYPNALGIA</h1>
+            <div class="tag">Dolor del sueño. Dolor que no despierta.</div>
+            <button class="btn" id="enter">Entrar</button>
+            <div class="note" style="margin-top:8px; font-size:12px; color:#666">Consejo: lee despacio. Las líneas
+                aparecerán cuando estés listo.</div>
+        </div>
+    </div>
+
+    <div class="lines" aria-hidden="true">
+        <svg viewBox="0 0 900 600" id="svgLines">
+            <path class="stroke" d="M20,80 L880,80 M60,180 L840,260 M120,340 C260,300 420,380 760,340" />
+            <path class="stroke" d="M150,500 L300,420 480,520 720,480" />
+            <path class="stroke" d="M460,120 Q520,180 600,160 T760,180" />
+        </svg>
+    </div>
+
+    <main class="story" id="story" aria-live="polite">
+        <p class="para">No sé cuántas veces soñé con ese lugar.</p>
+        <p class="para">Era como si el mundo se hubiese borrado y alguien, torpemente, intentara volver a dibujarlo.</p>
+        <p class="para">El suelo, el cielo… no había diferencia. Todo era un mismo blanco amarillento,</p>
+        <p class="para">como una hoja iluminada desde adentro, demasiado brillante para mirar, demasiado vacía para
+            escapar.</p>
+        <p class="para">Las líneas aparecían, flotando.</p>
+        <p class="para">Primero rectas, luego curvas, después cruzadas entre sí, formando ángulos imposibles.</p>
+        <p class="para">No hacían ruido, pero sentía que me hablaban.</p>
+        <p class="para">Eran órdenes, advertencias, o quizá recuerdos que no eran míos.</p>
+        <p class="para">A veces creía entenderlas.</p>
+        <p class="para">Y justo cuando pensaba que había un patrón, el vértigo me golpeaba.</p>
+        <p class="para">Era como si el suelo se doblara hacia atrás, y mi cuerpo cayera dentro de un dibujo que no tenía
+            fondo.</p>
+        <p class="para">Lloraba, sin entender por qué. Solo sabía que algo me observaba, algo que no tenía rostro ni
+            forma,</p>
+        <p class="para">solo geometría.</p>
+        <p class="para">Despertaba temblando, a veces corriendo.</p>
+        <p class="para">Decían que era sonambulismo.</p>
+        <p class="para">Yo creo que el sueño seguía, solo que mis ojos se abrían antes de tiempo.</p>
+        <p class="para">Nunca supe qué había en aquel mundo.</p>
+        <p class="para">Solo sé que, si lo recordara del todo, probablemente no volvería a dormir.</p>
+    </main>
+
+    <div class="toolbar">
+        <button class="chip" id="toggleLines">▶ líneas</button>
+        <button class="chip" id="contrast">☼ contraste</button>
+        <a href="Dreamlog.html" class="chip">
+            Volver a la página principal
+        </a>
+    </div>
+
+    <script>
+        const gate = document.getElementById('gate');
+        const enter = document.getElementById('enter');
+        const paras = Array.from(document.querySelectorAll('.para')); // ← SOLO UNA VEZ
+        const lines = document.querySelectorAll('.stroke');
+
+        enter.addEventListener('click', () => {
+            gate.style.opacity = '0';
+            gate.style.transition = 'opacity 800ms ease';
+            setTimeout(() => gate.remove(), 820);
+            revealText();
+        });
+
+        function triggerDark() {
+            // usamos <html> (documentElement) como ancla del modo oscuro
+            document.documentElement.classList.add('dark-end');
+        }
+
+        function revealText() {
+            paras.forEach((p, i) => {
+                setTimeout(() => {
+                    p.classList.add('show');
+                    if (i === paras.length - 1) {
+                        setTimeout(triggerDark, 800);
+                    }
+                }, 600 + i * 1800);
+            });
+        }
+
+        // Seguro adicional: si el último entra en viewport por scroll manual
+        const lastPara = paras[paras.length - 1];
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    triggerDark();
+                    obs.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        obs.observe(lastPara);
+
+        // === Handlers de los botones ===
+        // Toggle líneas (dibujar / reiniciar)
+        document.getElementById('toggleLines')?.addEventListener('click', function () {
+            const playing = this.dataset.playing === '1';
+            if (!playing) {
+                lines.forEach((l, i) => setTimeout(() => l.classList.add('draw'), i * 700));
+                this.textContent = '❚❚ líneas';
+                this.dataset.playing = '1';
+            } else {
+                lines.forEach(l => {
+                    l.classList.remove('draw');
+                    l.style.strokeDashoffset = 1200; // reset
+                });
+                this.textContent = '▶ líneas';
+                this.dataset.playing = '0';
+            }
+        });
+
+        // Modo alto contraste (por si el fondo te queda muy claro)
+        document.getElementById('contrast')?.addEventListener('click', function () {
+            const high = document.body.classList.toggle('high-contrast');
+            if (high) {
+                document.documentElement.style.setProperty('--bg', '#fffef7');
+                document.documentElement.style.setProperty('--ink', '#111');
+            } else {
+                document.documentElement.style.setProperty('--bg', '#f7f3e4');
+                document.documentElement.style.setProperty('--ink', '#2a2a2a');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Emetomorfosis — Archivo de luz azul</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/madotsuki no.gif" type="image/x-icon">
+
+    <!-- Fuentes -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;600&family=Space+Grotesk:wght@300;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-x: 50;
+            --bg-y: 50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #f7f7f7;
+            background:
+                radial-gradient(circle at calc(var(--bg-x)*1%) calc(var(--bg-y)*1%), rgba(58, 108, 191, 0.75), transparent 60%),
+                radial-gradient(circle at 12% 120%, rgba(255, 189, 110, 0.82), transparent 60%),
+                radial-gradient(circle at 90% -10%, rgba(49, 77, 148, 0.75), transparent 65%),
+                linear-gradient(150deg, #0a1024 0%, #080a1b 50%, #0e040c 100%);
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            padding: 2.5rem 1.2rem;
+            position: relative;
+            opacity: 0;
+            animation: scene-fade-in 1.8s ease forwards;
+        }
+
+        @keyframes scene-fade-in {
+            from {
+                opacity: 0;
+                filter: blur(4px);
+            }
+
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        /* Esferas de luz flotantes muy suaves */
+        .orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.22;
+            mix-blend-mode: screen;
+            animation: float-orb 18s ease-in-out infinite alternate;
+        }
+
+        .orb--blue {
+            background: radial-gradient(circle, rgba(70, 120, 200, 0.85), transparent 65%);
+        }
+
+
+        .orb--orange {
+            background: radial-gradient(circle, rgba(255, 180, 100, 0.9), transparent 70%);
+        }
+
+
+        .orb:nth-child(1) {
+            top: 8%;
+            left: 4%;
+            animation-delay: 0s;
+            transform-origin: 20% 0%;
+        }
+
+        .orb:nth-child(2) {
+            bottom: -8%;
+            right: -4%;
+            animation-delay: 4s;
+            transform-origin: 100% 100%;
+        }
+
+        .orb:nth-child(3) {
+            top: 40%;
+            right: 15%;
+            animation-delay: 8s;
+            transform-origin: 80% 40%;
+        }
+
+        @keyframes float-orb {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate3d(10px, -18px, 0) scale(1.05);
+            }
+
+            100% {
+                transform: translate3d(-14px, 14px, 0) scale(0.98);
+            }
+        }
+
+        /* Capa de halo detrás del poema (no contenedor, solo luz) */
+        .halo {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(40, 65, 120, 0.8), transparent 70%),
+                radial-gradient(circle at 50% 60%, rgba(255, 195, 120, 0.22), transparent 82%);
+            mix-blend-mode: soft-light;
+            opacity: 0.9;
+            transition: opacity 0.6s ease;
+        }
+
+
+        /* Contenido principal*/
+        main {
+            position: relative;
+            z-index: 3;
+            max-width: 720px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            /* centra el bloque */
+        }
+
+        header {
+            margin-bottom: 1.8rem;
+        }
+
+        .tagline {
+            font-size: 0.72rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(235, 232, 240, 0.7);
+            margin-bottom: 0.7rem;
+        }
+
+        h1 {
+            font-family: "Spectral SC", "Times New Roman", serif;
+            font-size: clamp(1.7rem, 4vw, 2.3rem);
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            margin-bottom: 0.35rem;
+            color: #d9edff;
+            text-shadow:
+                0 0 12px rgba(145, 209, 255, 0.6),
+                0 0 25px rgba(15, 93, 183, 0.6);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: rgba(235, 229, 238, 0.78);
+            max-width: 26rem;
+            margin: 0 auto;
+        }
+
+        /* Poema flotando directamente sobre el fondo */
+        .poem {
+            margin-top: 1.8rem;
+            font-family: "Spectral SC", "Times New Roman", serif;
+            font-size: 1rem;
+            line-height: 2;
+            letter-spacing: 0.01em;
+            color: #f9f8ff;
+            text-shadow: 0 0 8px rgba(8, 16, 40, 0.8);
+        }
+
+        .poem p {
+            margin-bottom: 1.1rem;
+        }
+
+        .poem em {
+            font-style: italic;
+        }
+
+        .keyword {
+            color: #ffd49a;
+            text-shadow:
+                0 0 6px rgba(255, 212, 154, 0.85),
+                0 0 22px rgba(255, 176, 104, 0.65);
+        }
+
+
+        .keyword.blue {
+            color: #97c5ff;
+            text-shadow:
+                0 0 6px rgba(151, 197, 255, 0.9),
+                0 0 22px rgba(90, 130, 220, 0.8);
+        }
+
+
+        .poem:hover .keyword {
+            text-shadow:
+                0 0 10px rgba(255, 214, 170, 0.8),
+                0 0 22px rgba(255, 178, 109, 0.7);
+        }
+
+        .poem:hover .keyword.blue {
+            text-shadow:
+                0 0 10px rgba(166, 219, 255, 1),
+                0 0 24px rgba(91, 179, 255, 0.9);
+        }
+
+        .ending {
+            margin-top: 1.4rem;
+            color: #dbefff;
+            text-shadow:
+                0 0 14px rgba(160, 219, 255, 0.7),
+                0 0 26px rgba(84, 163, 255, 0.7);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: ending-fade 1.7s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes ending-fade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Botón de volver minimalista, esquina inferior derecha */
+        .back-link {
+            position: fixed;
+            right: 1.7rem;
+            bottom: 1.5rem;
+            z-index: 4;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: rgba(225, 232, 245, 0.85);
+            border-bottom: 1px solid rgba(225, 232, 245, 0.35);
+            padding-bottom: 0.15rem;
+            transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #ffd1a0;
+            border-color: rgba(255, 209, 160, 0.9);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1.8rem 1.1rem 2.8rem;
+            }
+
+            .back-link {
+                right: 1.1rem;
+                bottom: 1.1rem;
+                letter-spacing: 0.18em;
+            }
+
+            .poem {
+                font-size: 0.96rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Esferas de luz flotantes -->
+    <div class="orbs" aria-hidden="true">
+        <div class="orb orb--orange"></div>
+        <div class="orb orb--blue"></div>
+        <div class="orb orb--blue"></div>
+    </div>
+
+    <!-- Halo general detrás del poema -->
+    <div class="halo" aria-hidden="true"></div>
+
+    <!-- Enlace de volver -->
+    <a href="Dreamlog.html" class="back-link">volver</a>
+
+    <main>
+        <header>
+            <h1>Emetomorfosis</h1>
+        </header>
+
+        <section class="poem" aria-label="Poema Emetomorfosis">
+            <p>
+                El parque era un altar <span class="keyword">suspendido</span>,<br>
+                un monte Olimpo hecho de árboles que respiraban lento.<br>
+                La gente reía con la claridad en los ojos,<br>
+                miraban la ciudad desde los binoculares del destino,<br>
+                y el sol pintaba las esculturas<br>
+                como si alguien hubiese aprendido a domar la <span class="keyword">luz</span>.
+            </p>
+
+            <p>
+                Todo era bello,<br>
+                tan bello que dolía un poco mirar.
+            </p>
+
+            <p>
+                Entonces vi una casa:<br>
+                blanca por dentro, bañada en un <span class="keyword blue">azul</span> tibio,<br>
+                un <span class="keyword blue">azul</span> que parecía mentirme en silencio.<br>
+                Entré como quien entra en un recuerdo que no pidió,<br>
+                dejándome abrazar por una calma demasiado perfecta.
+            </p>
+
+            <p>
+                El estante estaba vacío,<br>
+                como un pecho que ya no tiene nada que guardar.<br>
+                Y allí, en la cima,<br>
+                reposaba el <span class="keyword">insecto</span>:<br>
+                rosado, grande, tembloroso,<br>
+                con las puntas cafés como si hubiese tocado<br>
+                demasiadas pesadillas ajenas.
+            </p>
+
+            <p>
+                Tropecé,<br>
+                y la criatura bajó hacia mí<br>
+                como una verdad que ya no puede esperar.<br>
+                Su pata rozó la <span class="keyword blue">luz</span> azul<br>
+                y la volvió insoportablemente real.
+            </p>
+
+            <p>
+                Entonces lo supe:<br>
+                ni siquiera en los sueños más hermosos<br>
+                estoy a salvo de lo que llevo dentro.
+            </p>
+
+            <p>
+                Agarré lo primero que encontré,<br>
+                golpeé,<br>
+                y el <span class="keyword">insecto</span> estalló como un pensamiento reprimido.<br>
+                Caí al suelo,<br>
+                mirando el techo desconocido,<br>
+                dejándome hundir en el eco de mis propios recuerdos.
+            </p>
+
+            <p class="ending">
+                Y cuando <span class="keyword">desperté</span>,<br>
+                con el pecho aún agitado,<br>
+                entendí que estaba bien,<br>
+                que no había parque, ni casa, ni insecto,<br>
+                solo <span class="keyword">ella</span>,<br>
+                respirando a mi lado<br>
+                como si fuese la <span class="keyword blue">luz</span> azul que no miente.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        // Parallax muy suave del fondo según posición del cursor
+        (function () {
+            const setPos = (x, y) => {
+                document.documentElement.style.setProperty("--bg-x", x);
+                document.documentElement.style.setProperty("--bg-y", y);
+            };
+
+            // Movimiento con el ratón
+            window.addEventListener("pointermove", (e) => {
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                // Muy sutil, centrado alrededor del 50%
+                const easedX = 40 + (x - 50) * 0.2;
+                const easedY = 45 + (y - 50) * 0.2;
+                setPos(easedX, easedY);
+            });
+
+            // Posición inicial
+            setPos(50, 50);
+        })();
+    </script>
+</body>
+
+</html>

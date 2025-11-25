@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Prosopodismorfia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/madotsuki no.gif" type="image/x-icon">
+
+    <!-- Fuentes -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;600&family=Space+Grotesk:wght@300;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #050307;
+            --bg-accent: #2a0306;
+            --text-main: #f3f3f3;
+            --text-muted: #c6b7b7;
+            --accent-red: #f44336;
+            --accent-soft: #ffbfae;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at top, #3c0a0f 0, rgba(7, 0, 0, 0.4) 40%, #000 80%),
+                radial-gradient(circle at bottom, #120008 0, #000 60%);
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Capa de ruido/grano */
+        body::before {
+            content: "";
+            pointer-events: none;
+            position: fixed;
+            inset: -10px;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.22;
+            mix-blend-mode: soft-light;
+            z-index: 0;
+        }
+
+        /* Efecto CRT */
+        body::after {
+            content: "";
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.04),
+                    rgba(255, 255, 255, 0.04) 1px,
+                    transparent 1px,
+                    transparent 3px);
+            opacity: 0.12;
+            mix-blend-mode: soft-light;
+            animation: crt-flicker 4s infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes crt-flicker {
+            0% {
+                opacity: 0.08;
+            }
+
+            40% {
+                opacity: 0.12;
+            }
+
+            60% {
+                opacity: 0.16;
+            }
+
+            100% {
+                opacity: 0.1;
+            }
+        }
+
+        .page {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            padding: 2.5rem 1.5rem 4rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-family: "Spectral SC", "Times New Roman", serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-soft);
+            text-shadow: 0 0 12px rgba(255, 120, 120, 0.4);
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        main {
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .poem-wrapper {
+            position: relative;
+            padding: 2rem 1.75rem 2.5rem;
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: radial-gradient(circle at top, rgba(138, 16, 32, 0.2), transparent 55%),
+                rgba(5, 3, 10, 0.88);
+            box-shadow:
+                0 0 40px rgba(0, 0, 0, 0.8),
+                0 0 18px rgba(255, 80, 80, 0.22);
+            backdrop-filter: blur(4px);
+            overflow: hidden;
+        }
+
+        .poem-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 15% 0, rgba(255, 255, 255, 0.06), transparent 55%),
+                radial-gradient(circle at 85% 100%, rgba(244, 67, 54, 0.08), transparent 55%);
+            mix-blend-mode: screen;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .poem-title {
+            font-family: "Spectral SC", "Times New Roman", serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 200, 200, 0.9);
+        }
+
+        .poem-body {
+            position: relative;
+            font-family: "Spectral SC", "Times New Roman", serif;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            color: var(--text-main);
+            max-width: 52rem;
+            margin: 0 auto;
+        }
+
+        .poem-body p {
+            margin-bottom: 1rem;
+            text-indent: 0.75em;
+        }
+
+        .poem-body p:first-of-type {
+            text-indent: 0;
+        }
+
+        .poem-body em {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .horror-stanza {
+            position: relative;
+            color: #f5dada;
+        }
+
+        .horror-stanza .focus-word {
+            color: var(--accent-red);
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(244, 67, 54, 0.7);
+            cursor: pointer;
+            transition: transform 0.15s ease, text-shadow 0.15s ease, letter-spacing 0.15s ease;
+        }
+
+        .horror-stanza .focus-word:hover {
+            transform: scale(1.04);
+            letter-spacing: 0.06em;
+            text-shadow:
+                0 0 2px rgba(244, 67, 54, 0.9),
+                0 0 12px rgba(244, 67, 54, 0.9);
+        }
+
+        .shiver {
+            transition: transform 0.15s ease;
+        }
+
+        .shiver.active-shiver {
+            animation: shiver 0.45s ease-in-out 0s 1;
+        }
+
+        .shiver:hover {
+            animation: shiver 0.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes shiver {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            20% {
+                transform: translate(-1px, -1px);
+            }
+
+            40% {
+                transform: translate(1px, 1px);
+            }
+
+            60% {
+                transform: translate(-1px, 1px);
+            }
+
+            80% {
+                transform: translate(1px, -1px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .ending {
+            margin-top: 1.5rem;
+            color: var(--accent-soft);
+            text-shadow: 0 0 12px rgba(255, 153, 128, 0.35);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fade-in-ending 1.8s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fade-in-ending {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ending strong {
+            font-weight: 600;
+        }
+
+        /* Botón para volver a la página principal */
+        .back-wrapper {
+            margin-top: 2.2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-button {
+            position: relative;
+            padding: 0.75rem 1.8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 62, 62, 0.7);
+            background: radial-gradient(circle at top, rgba(44, 4, 0, 0.18), rgba(10, 5, 5, 0.96));
+            color: #ffecec;
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 0;
+            text-decoration: none;
+        }
+
+        .back-button span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button::before,
+        .back-button::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 7, 7, 0.4), transparent 40%, rgba(224, 11, 32, 0.35));
+            mix-blend-mode: screen;
+            opacity: 0;
+            transform: translateX(-40%);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 1;
+        }
+
+        .back-button::after {
+            transform: translateX(40%);
+        }
+
+        .back-button:hover::before,
+        .back-button:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .back-button:active {
+            transform: scale(0.97);
+        }
+
+        /* Ojos weirdcore flotantes */
+        .eyes-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .eye {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+
+            /* Aquí usas tu archivo */
+            background-image: url("../img/eye.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .eye.active {
+            opacity: 0.55;
+        }
+
+
+        .eye.active {
+            opacity: 0.55;
+        }
+
+        /* Info pequeña abajo */
+        footer {
+            margin-top: 1.6rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: rgba(230, 210, 210, 0.6);
+        }
+
+        footer span {
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 640px) {
+            .poem-wrapper {
+                padding: 1.6rem 1.2rem 2rem;
+                border-radius: 0.9rem;
+            }
+
+            .poem-body {
+                font-size: 0.92rem;
+            }
+
+            .eye {
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        /* Ajustar espacio al final para que no se recorte el botón */
+        @media (max-height: 600px) {
+            .page {
+                padding-bottom: 5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Capa de ojos weirdcore -->
+    <div class="eyes-layer" aria-hidden="true"></div>
+
+    <div class="page">
+        <header>
+            <div class="tagline">Algo distinto...</div>
+            <h1>Prosopodismorfia</h1>
+            <p class="subtitle">Un error transformado en sueño</p>
+        </header>
+
+        <main>
+            <section class="poem-wrapper" aria-label="Prosopodismorfia">
+                <h2 class="poem-title">¿?</h2>
+
+                <div class="poem-body">
+                    <p>
+                        La casa respiraba raro,<br>
+                        como si cada muro recordara un nombre que no era mío.
+                    </p>
+
+                    <p class="horror-stanza shiver"><br>
+                        Éramos varios, temblando entre sombras,<br>
+                        peleando contra un <span class="focus-word">demonio</span> que hablaba con todas nuestras
+                        voces.<br>
+                        Lo degollé tarde; demasiado tarde.
+                    </p>
+
+                    <p class="horror-stanza shiver"><br>
+                        Algo detrás de él despertó,<br>
+                        una <span class="focus-word">abominación</span> sin dueño,<br>
+                        cambiando de <span class="focus-word">forma</span> como si mis recuerdos fueran máscaras.<br>
+                        Tomó los rostros de mi familia,<br>
+                        sonrió con bocas que yo conocía.
+                    </p>
+
+                    <p class="horror-stanza shiver"><br>
+                        Corrí.<br>
+                        Primero por la puerta,<br>
+                        luego por los techos,<br>
+                        casi volando sobre calles que se estiraban como pesadillas.<br>
+                        Nadie me entendía; todos eran reflejos dudosos.<br>
+                        Temí que la criatura estuviera escondida entre ellos.
+                    </p>
+
+                    <p class="horror-stanza shiver"><br>
+                        Una mano me detuvo.<br>
+                        Un amigo.<br>
+                        Un rostro que no cambiaba.<br>
+                        Pero incluso él se deshizo cuando pedí ayuda.<br>
+                        Seguí <span class="focus-word">corriendo</span>,<br>
+                        con el corazón rompiendo el aire,<br>
+                        huyendo de algo que ya no sabía si era real<br>
+                        o si estaba hecho con mis propios miedos.
+                    </p>
+
+                    <p class="ending"><br>
+                        Desperté agitado, roto, confundido…<br>
+                        y aun así, todo estaba bien,<br>
+                        porque <strong>ella</strong> estaba a mi lado,<br>
+                        sentada en el borde del sueño<br>
+                        como si siempre hubiese sido la salida.
+                    </p>
+                </div>
+
+                <div class="back-wrapper">
+                    <!-- Cambia href a la ruta real de tu página principal -->
+                    <a href="Dreamlog.html" class="back-button">
+                        <span>Volver a la página principal</span>
+                    </a>
+                </div>
+            </section>
+
+            <footer>
+                <span>BUAxCgAABPyKn1h944rBgJLJ6y/Dy8VWNnyU</span>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Audio ambiente: -->
+    <iframe id="bgm" width="0" height="0"
+        src="https://www.youtube.com/embed/8fDkkD2pGuI?enablejsapi=1&autoplay=0&loop=1&playlist=8fDkkD2pGuI&controls=0&mute=0"
+        title="Antiatazagorafobia BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+
+    <script>
+        // ====== Audio ambiente (autoplay suave si el navegador lo permite) ======
+        (function () {
+            const audio = document.getElementById("ambient-audio");
+            if (!audio) return;
+
+            const tryPlay = () => {
+                audio.volume = 0.25;
+                audio.play().catch(() => {
+                    // Si el navegador bloquea autoplay, se activará cuando el usuario haga click
+                    document.addEventListener("click", () => {
+                        audio.play().catch(() => { });
+                    }, { once: true });
+                });
+            };
+
+            if (document.readyState === "complete") {
+                tryPlay();
+            } else {
+                window.addEventListener("load", tryPlay);
+            }
+        })();
+
+        // ====== Ojos weirdcore que siguen el cursor ======
+        (function () {
+            const eyesLayer = document.querySelector(".eyes-layer");
+            if (!eyesLayer) return;
+
+            const eyesCount = 7;
+            const eyes = [];
+
+            for (let i = 0; i < eyesCount; i++) {
+                const eye = document.createElement("div");
+                eye.className = "eye";
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                eye.dataset.baseX = x;
+                eye.dataset.baseY = y;
+                eye.style.left = x + "%";
+                eye.style.top = y + "%";
+                eyesLayer.appendChild(eye);
+                eyes.push(eye);
+            }
+
+            let lastX = window.innerWidth / 2;
+            let lastY = window.innerHeight / 2;
+
+            window.addEventListener("pointermove", (e) => {
+                lastX = e.clientX;
+                lastY = e.clientY;
+            });
+
+            function animateEyes() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+
+                const normX = (lastX / w - 0.5) * 2;
+                const normY = (lastY / h - 0.5) * 2;
+
+                eyes.forEach((eye, index) => {
+                    const baseX = parseFloat(eye.dataset.baseX);
+                    const baseY = parseFloat(eye.dataset.baseY);
+                    const strength = 4 + index * 0.6;
+
+                    const offsetX = normX * strength;
+                    const offsetY = normY * strength;
+
+                    eye.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+                    eye.classList.add("active");
+                });
+
+                requestAnimationFrame(animateEyes);
+            }
+
+            animateEyes();
+        })();
+
+        // ====== Activar “temblor” cuando las estrofas están visibles ======
+        (function () {
+            const shiverBlocks = document.querySelectorAll(".shiver");
+            if (!("IntersectionObserver" in window) || shiverBlocks.length === 0) {
+                shiverBlocks.forEach(p => p.classList.add("active-shiver"));
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("active-shiver");
+                        }
+                    });
+                },
+                { threshold: 0.3 }
+            );
+
+            shiverBlocks.forEach(p => observer.observe(p));
+        })();
+    </script>
+</body>
+
+</html>

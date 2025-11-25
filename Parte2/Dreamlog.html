@@ -140,7 +140,13 @@
             padding: 0;
             margin: 10px 0 6px;
             display: grid;
-            gap: 10px
+            gap: 10px;
+            transition: opacity .3s ease, transform .3s ease;
+        }
+
+        .menu.is-fading {
+            opacity: 0;
+            transform: translateY(8px);
         }
 
         .menu a {
@@ -396,6 +402,59 @@
                 transition: none;
             }
         }
+
+        /* === Paginación Dreamlog === */
+        .pagination {
+            margin: 24px auto 4px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        .page-btn {
+            min-width: 38px;
+            padding: 6px 8px;
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: #0a060a;
+            color: #e6ccd9;
+            border: 1px solid #a26c91;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(255, 179, 222, 0.25);
+            transition:
+                background .15s ease,
+                transform .15s ease,
+                box-shadow .15s ease,
+                color .15s ease;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: #1d0c16;
+            color: #ffb3de;
+            text-shadow: 0 0 4px #ffb3de, 0 0 8px #ffb3de;
+            box-shadow: 0 0 10px rgba(255, 179, 222, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .page-btn.is-current {
+            background: #1d0c16;
+            color: #ffb3de;
+            border-color: #ffb3de;
+            box-shadow:
+                0 0 10px rgba(255, 179, 222, 0.4),
+                0 0 16px rgba(255, 179, 222, 0.3);
+        }
+
+        .page-btn:disabled {
+            opacity: .45;
+            cursor: default;
+            box-shadow: none;
+            transform: none;
+        }
     </style>
 </head>
 
@@ -430,9 +489,40 @@
                 </a>
             </li>
             <li>
-                <a href="#" data-preview="???" aria-describedby="preview">
+                <a href="hypnalgia.html" data-preview="Eran órdenes, advertencias, o quizá recuerdos que no eran míos."
+                    aria-describedby="preview">
                     <div class="left">
                         <span class="badge">#002</span>
+                        <span class="title-item">Hypnalgia</span>
+                    </div>
+                    <span class="meta">💤</span>
+                </a>
+            </li>
+            <li>
+                <a href="Prosopodismorfia.html" data-preview="Nadie me entendía; todos eran reflejos dudosos."
+                    aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#003</span>
+                        <span class="title-item">Prosopodismorfia</span>
+                    </div>
+                    <span class="meta">👁️‍🗨️</span>
+                </a>
+            </li>
+            <li>
+                <a href="Emetomorfosis.html"
+                    data-preview="Ni siquiera en los sueños más hermosos estoy a salvo de lo que llevo dentro."
+                    aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#004</span>
+                        <span class="title-item">Emetomorfosis</span>
+                    </div>
+                    <span class="meta">🔷</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-preview="???" aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#005</span>
                         <span class="title-item">???</span>
                     </div>
                     <span class="meta">❓</span>
@@ -441,22 +531,38 @@
             <li>
                 <a href="#" data-preview="???" aria-describedby="preview">
                     <div class="left">
-                        <span class="badge">#003</span>
+                        <span class="badge">#006</span>
                         <span class="title-item">???</span>
                     </div>
-                    <span class="meta">❓ </span>
+                    <span class="meta">❓</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-preview="???" aria-describedby="preview">
                     <div class="left">
-                        <span class="badge">#004</span>
+                        <span class="badge">#007</span>
+                        <span class="title-item">???</span>
+                    </div>
+                    <span class="meta">❓</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-preview="???" aria-describedby="preview">
+                    <div class="left">
+                        <span class="badge">#008</span>
                         <span class="title-item">???</span>
                     </div>
                     <span class="meta">❓</span>
                 </a>
             </li>
         </ul>
+
+        <!-- PAGINADOR DREAMLOG -->
+        <nav id="dreamPagination" class="pagination" aria-label="Páginas de entradas de sueños">
+            <!-- Los botones se llenan con JS -->
+        </nav>
+
+
 
         <footer>
             <span>© Saikore — 2025</span>
@@ -564,6 +670,79 @@
 
 
     </script>
+
+    <script>
+        (function () {
+            const PAGE_SIZE = 4; // cuántas entradas por "página"
+            const list = document.getElementById('dreamMenu');
+            const pagination = document.getElementById('dreamPagination');
+
+            if (!list || !pagination) return;
+
+            const items = Array.from(list.querySelectorAll('li'));
+            if (!items.length) return;
+
+            const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+            let currentPage = 1;
+
+            function applyPage(page) {
+                currentPage = page;
+                items.forEach((li, idx) => {
+                    const p = Math.floor(idx / PAGE_SIZE) + 1;
+                    li.style.display = (p === currentPage) ? '' : 'none';
+                });
+            }
+
+            function renderPagination() {
+                pagination.innerHTML = '';
+
+                function makeBtn(label, page, opts = {}) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = label;
+                    btn.className = 'page-btn';
+                    if (opts.current) btn.classList.add('is-current');
+                    if (opts.disabled) {
+                        btn.disabled = true;
+                    } else {
+                        btn.addEventListener('click', () => changePage(page));
+                    }
+                    pagination.appendChild(btn);
+                }
+
+                // « y ‹
+                makeBtn('«', 1, { disabled: currentPage === 1 });
+                makeBtn('‹', currentPage - 1, { disabled: currentPage === 1 });
+
+                // números
+                for (let p = 1; p <= totalPages; p++) {
+                    const label = String(p).padStart(2, '0'); // 01, 02, 03...
+                    makeBtn(label, p, { current: p === currentPage });
+                }
+
+                // › y »
+                makeBtn('›', currentPage + 1, { disabled: currentPage === totalPages });
+                makeBtn('»', totalPages, { disabled: currentPage === totalPages });
+            }
+
+            function changePage(page) {
+                if (page < 1 || page > totalPages || page === currentPage) return;
+
+                // fundido oscuro
+                list.classList.add('is-fading');
+                setTimeout(() => {
+                    applyPage(page);
+                    renderPagination();
+                    list.classList.remove('is-fading');
+                }, 220); // coincide con el .3s de CSS aproximadamente
+            }
+
+            // Inicializar: mostrar solo la primera "página"
+            applyPage(1);
+            renderPagination();
+        })();
+    </script>
+
 
     <script>
         (function () {
