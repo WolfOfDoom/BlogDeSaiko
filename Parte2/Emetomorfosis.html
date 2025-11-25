@@ -282,6 +282,54 @@
                 font-size: 0.96rem;
             }
         }
+
+        /* Botón flotante para BGM */
+        #bgmToggle {
+            position: fixed;
+            right: 1.7rem;
+            bottom: 4.1rem;
+            /* un poco encima de "volver" */
+            z-index: 4;
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: 1px solid rgba(223, 234, 255, 0.8);
+            background: radial-gradient(circle at 30% 0%, rgba(151, 197, 255, 0.22), rgba(4, 8, 20, 0.95));
+            color: #e7f2ff;
+            font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow:
+                0 0 12px rgba(129, 190, 255, 0.5),
+                0 0 26px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 6px rgba(223, 239, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                background 0.15s ease,
+                color 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        #bgmToggle:hover {
+            transform: translateY(-1px);
+            background: radial-gradient(circle at 10% 0%, rgba(181, 215, 255, 0.3), rgba(5, 10, 25, 1));
+            box-shadow:
+                0 0 16px rgba(161, 210, 255, 0.6),
+                0 0 30px rgba(0, 0, 0, 1);
+        }
+
+        #bgmToggle.playing {
+            color: #ffddb6;
+            border-color: rgba(255, 221, 182, 0.9);
+            box-shadow:
+                0 0 16px rgba(255, 221, 182, 0.7),
+                0 0 34px rgba(0, 0, 0, 1);
+        }
     </style>
 </head>
 
@@ -298,6 +346,12 @@
 
     <!-- Enlace de volver -->
     <a href="Dreamlog.html" class="back-link">volver</a>
+    <!-- Botón flotante para controlar la música -->
+    <button id="bgmToggle" aria-label="Alternar música de fondo">♪</button>
+
+    <iframe id="bgm" width="0" height="0"
+        src="https://www.youtube.com/embed/F1LU2By8XRQ?enablejsapi=1&autoplay=0&loop=1&playlist=F1LU2By8XRQ&controls=0&mute=1"
+        title="Emetomorfosis BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
     <main>
         <header>
@@ -371,6 +425,76 @@
             </p>
         </section>
     </main>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let emetPlayer;
+        let bgmIsPlaying = false;
+
+        // Llamado automáticamente por la API de YouTube
+        function onYouTubeIframeAPIReady() {
+            const iframe = document.getElementById('bgm');
+            if (!iframe) return;
+
+            emetPlayer = new YT.Player('bgm', {
+                events: {
+                    onReady: onEmetBgmReady
+                }
+            });
+        }
+
+        function onEmetBgmReady() {
+            const btn = document.getElementById('bgmToggle');
+
+            try {
+                emetPlayer.playVideo();
+            } catch (e) { }
+
+            // Empezamos mudo y hacemos fade-in de volumen
+            emetPlayer.mute();
+            emetPlayer.setVolume(0);
+            bgmIsPlaying = true;
+
+            if (btn) {
+                btn.classList.add('playing');
+                btn.textContent = '❚❚';
+            }
+
+            setTimeout(() => {
+                emetPlayer.unMute();
+                let vol = 0;
+                const target = 24; // volumen suave
+                const fade = setInterval(() => {
+                    if (vol < target) {
+                        vol++;
+                        emetPlayer.setVolume(vol);
+                    } else {
+                        clearInterval(fade);
+                    }
+                }, 150);
+            }, 600);
+        }
+
+        (function () {
+            const btn = document.getElementById('bgmToggle');
+            if (!btn) return;
+
+            btn.addEventListener('click', () => {
+                if (!emetPlayer) return;
+
+                if (bgmIsPlaying) {
+                    emetPlayer.pauseVideo();
+                    bgmIsPlaying = false;
+                    btn.classList.remove('playing');
+                    btn.textContent = '♪';
+                } else {
+                    emetPlayer.playVideo();
+                    bgmIsPlaying = true;
+                    btn.classList.add('playing');
+                    btn.textContent = '❚❚';
+                }
+            });
+        })();
+    </script>
 
     <script>
         // Parallax muy suave del fondo según posición del cursor
