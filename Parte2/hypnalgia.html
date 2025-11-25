@@ -312,6 +312,20 @@
         .dark-end .para:last-child {
             text-shadow: 0 0 10px rgba(255, 255, 255, .35), 0 0 24px rgba(200, 220, 255, .15);
         }
+
+        /* Botón de música (chip especial) */
+        #bgmToggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        #bgmToggle.is-playing {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 18px var(--shadow);
+        }
     </style>
 </head>
 
@@ -364,10 +378,18 @@
     <div class="toolbar">
         <button class="chip" id="toggleLines">▶ líneas</button>
         <button class="chip" id="contrast">☼ contraste</button>
+        <!-- Botón de música -->
+        <button class="chip" id="bgmToggle">♪ música</button>
         <a href="Dreamlog.html" class="chip">
             Volver a la página principal
         </a>
+        <!-- Audio ambiente: -->
+        <iframe id="bgm" width="0" height="0"
+            src="https://www.youtube.com/embed/hyjXzZPhpwc?enablejsapi=1&autoplay=0&loop=1&playlist=hyjXzZPhpwc&controls=0&mute=1"
+            title="Prosopodismorfia BGM" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         const gate = document.getElementById('gate');
@@ -440,6 +462,74 @@
             }
         });
     </script>
+
+    <script>
+        let hypPlayer;
+        let bgmIsPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            const iframe = document.getElementById('bgm');
+            if (!iframe) return;
+
+            hypPlayer = new YT.Player('bgm', {
+                events: {
+                    onReady: onHypBgmReady
+                }
+            });
+        }
+
+        function onHypBgmReady() {
+            const btn = document.getElementById('bgmToggle');
+            try {
+                hypPlayer.playVideo();
+            } catch (e) { }
+
+            // Empezamos mudo y hacemos fade-in suave
+            hypPlayer.mute();
+            hypPlayer.setVolume(0);
+            bgmIsPlaying = true;
+            if (btn) {
+                btn.classList.add('is-playing');
+                btn.textContent = '❚❚ música';
+            }
+
+            setTimeout(() => {
+                hypPlayer.unMute();
+                let vol = 0;
+                const target = 24; // volumen inicial suave
+                const fade = setInterval(() => {
+                    if (vol < target) {
+                        vol++;
+                        hypPlayer.setVolume(vol);
+                    } else {
+                        clearInterval(fade);
+                    }
+                }, 150);
+            }, 600);
+        }
+
+        (function () {
+            const btn = document.getElementById('bgmToggle');
+            if (!btn) return;
+
+            btn.addEventListener('click', () => {
+                if (!hypPlayer) return;
+
+                if (bgmIsPlaying) {
+                    hypPlayer.pauseVideo();
+                    bgmIsPlaying = false;
+                    btn.classList.remove('is-playing');
+                    btn.textContent = '♪ música';
+                } else {
+                    hypPlayer.playVideo();
+                    bgmIsPlaying = true;
+                    btn.classList.add('is-playing');
+                    btn.textContent = '❚❚ música';
+                }
+            });
+        })();
+    </script>
+
 
 </body>
 
