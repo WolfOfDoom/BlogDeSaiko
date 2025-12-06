@@ -104,9 +104,9 @@
         12: { // Diciembre — Navidad
             name: "Navidad", emojis: ["🎄", "✨", "❄️", "🕯️"],
             bg: [
-                "radial-gradient(1500px 800px at 10% -10%, rgba(90,200,140,0.14), transparent 60%)",
-                "radial-gradient(1200px 700px at 110% 0%, rgba(120,180,255,0.10), transparent 55%)",
-                "linear-gradient(180deg,#0a1710 0%, #163226 60%, #0a1710 100%)"
+                "radial-gradient(1500px 800px at 10% -10%, rgba(200, 90, 90, 0.14), transparent 60%)",
+                "radial-gradient(1200px 700px at 110% 0%, rgba(255, 120, 120, 0.1), transparent 55%)",
+                "linear-gradient(180deg,#0a1710 0%, #321616ff 60%, #170a0aff 100%)"
             ],
             paper1: "#f5fff7", paper2: "#ecfff2", border: "#cbe6d3", title: "#173422", text: "#243a2e"
         },
